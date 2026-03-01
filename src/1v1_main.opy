@@ -1,3 +1,6 @@
+# Include for global scoping
+#!include "heroes/sombra/hack_status.opy"
+
 # Useful constants and macros
 #!include "constants/ow1_constants.opy"
 #!include "constants/ow2_constants.opy"

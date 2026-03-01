@@ -39,6 +39,7 @@
 #!include "heroes/baptiste/init.opy"
 #!include "heroes/bastion/init.opy"
 #!include "heroes/brigitte/init.opy"
+#!include "heroes/domina/init.opy"
 #!include "heroes/doomfist/init.opy"
 #!include "heroes/dva/init.opy"
 #!include "heroes/genji/init.opy"

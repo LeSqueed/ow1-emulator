@@ -5,6 +5,7 @@ subroutine initAshe
 subroutine initBaptiste
 subroutine initBastion
 subroutine initBrigitte
+subroutine initDomina
 subroutine initDoomfist
 subroutine initDva
 subroutine initEcho
@@ -64,6 +65,9 @@ def initHero():
             break
         case Hero.BRIGITTE:
             initBrigitte()
+            break
+        case Hero.DOMINA:
+            initDomina()
             break
         case Hero.DOOMFIST:
             initDoomfist()

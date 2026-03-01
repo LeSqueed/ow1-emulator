@@ -255,6 +255,11 @@ settings {
                 "ultGen%": percent(OW2_MCCREE_ULT_COST/OW1_MCCREE_ULT_COST),
                 "passiveHealthRegen": false
             },
+            "domina": {
+                "health%": percent(OW1_DOMINA_BARRIER_HEALTH/OW2_DOMINA_BARRIER_HEALTH),
+                "ultGen%": percent(OW2_DOMINA_ULT_COST/OW1_DOMINA_ULT_COST),
+                "passiveHealthRegen": false
+            },
             "doomfist": {
                 "ammoRegenerationTime%": percent(OW1_DOOMFIST_AMMO_REGEN/OW2_DOOMFIST_AMMO_REGEN),
                 "secondaryFireKb%": 0,
@@ -462,6 +467,7 @@ settings {
                 "bastion",
                 "brigitte",
                 "cassidy",
+                "domina",
                 "doomfist",
                 "dva",
                 "echo",
