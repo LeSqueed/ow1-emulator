@@ -8,6 +8,7 @@ const version = args[0];
 (async () => {
   await overpy.readyPromise;
   await generateWorkshop("ow1em_main.opy", "ow1em.txt");
+  await generateWorkshop("dev_main.opy", "dev.txt");
 })();
 
 // Expand #!include directives, resolving paths relative to each file's own directory.

@@ -14,6 +14,7 @@ subroutine initGenji
 subroutine initHanzo
 subroutine initHazard
 subroutine initIllari
+subroutine initJetpackCat
 subroutine initJunkerQueen
 subroutine initJunkrat
 subroutine initJuno
@@ -92,6 +93,9 @@ def initHero():
             break
         case Hero.ILLARI:
             initIllari()
+            break
+        case Hero.JETPACK_CAT:
+            initJetpackCat()
             break
         case Hero.JUNKER_QUEEN:
             initJunkerQueen()

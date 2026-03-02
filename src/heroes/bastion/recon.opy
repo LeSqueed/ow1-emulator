@@ -29,5 +29,5 @@ rule "[bastion/recon.opy]: Initialize recon mode":
 
 #     do:
 #         eventPlayer.setProjectileSpeed(100)
-#         wait(1/OW1_BASTION_RECON_GUN_FIRERATE)
+#         wait(1/OW1_BASTION_RECON_FIRE_RATE)
 #     while (RULE_CONDITION)

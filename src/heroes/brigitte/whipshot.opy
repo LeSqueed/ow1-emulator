@@ -6,4 +6,4 @@
 #     @Hero brigitte
 #     @Condition eventAbility == Button.ABILITY_1
 
-#     heal(victim, null, eventDamage - eventDamage*(OW1_BRIGITTE_WHIPSHOT_DAMAGE/OW2_BRIGITTE_WHIPSHOT_DAMAGE))
+#     heal(victim, null, eventDamage - eventDamage*(OW1_BRIGITTE_WHIP_SHOT_DAMAGE/OW2_BRIGITTE_WHIP_SHOT_DAMAGE))

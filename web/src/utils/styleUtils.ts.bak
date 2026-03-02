@@ -1,0 +1,44 @@
+import React from 'react';
+import { Tag } from 'antd';
+
+export const getPropertyTypeColor = (type: string): string => {
+  const colors: Record<string, string> = {
+    DAMAGE: 'red',
+    HEALING: 'green',
+    COOLDOWN: 'blue',
+    DURATION: 'purple',
+    RATE: 'orange',
+    RANGE: 'cyan',
+    BUFFER: 'volcano',
+    ULTIMATE: 'red',
+    MULTIPLIER: 'geekblue',
+    PHYSICS: 'lime',
+    DELAY: 'magenta',
+    SPEED: 'blue',
+    RADIUS: 'orange',
+    MAX_CHARGES: 'purple',
+    DEFAULT: 'default',
+  };
+  return colors[type] || 'default';
+};
+
+export const getRoleColor = (role: string): string => {
+  const colors: Record<string, string> = {
+    Tank: 'blue',
+    Dps: 'red',
+    Support: 'green',
+  };
+  return colors[role] || 'default';
+};
+
+export function AbilityTypeTag({ type }: { type: string }) {
+  return <Tag>{type}</Tag>;
+}
+
+export function PropertyTypeTag({ type }: { type: string }) {
+  return <Tag color={getPropertyTypeColor(type)}>{type}</Tag>;
+}
+
+export function RoleTag({ role }: { role: string }) {
+  return <Tag color={getRoleColor(role)}>{role}</Tag>;
+}

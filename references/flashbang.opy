@@ -1,9 +1,9 @@
-#!define OW1_MCCREE_FLASHBANG_AOE_RADIUS 3
-#!define OW1_MCCREE_FLASHBANG_COOLDOWN_TIME 10
-#!define OW1_MCCREE_FLASHBANG_DAMAGE 25
-#!define OW1_MCCREE_FLASHBANG_RANGE 7
-#!define OW1_MCCREE_FLASHBANG_SPEED 30
-#!define OW1_MCCREE_FLASHBANG_STUN_DURATION 0.8
+#!define OW1_CASSIDY_FLASHBANG_AOE_RADIUS 3
+#!define OW1_CASSIDY_FLASHBANG_COOLDOWN 10
+#!define OW1_CASSIDY_FLASHBANG_DAMAGE 25
+#!define OW1_CASSIDY_FLASHBANG_RANGE 7
+#!define OW1_CASSIDY_FLASHBANG_SPEED 30
+#!define OW1_CASSIDY_FLASHBANG_STUN_DURATION 0.8
 
 rule "[mccree/init.opy]: Disallow throwing Magnetic Grenade":
     @Event eachPlayer
@@ -31,18 +31,18 @@ rule "[mccree.opy]: Throw projectile when pressing e":
                      Relativity.TO_WORLD, 
                      ModifyHealth.DAMAGE, 
                      getOppositeTeam(eventPlayer.getTeam()), 
-                     OW1_MCCREE_FLASHBANG_DAMAGE, 
+                     OW1_CASSIDY_FLASHBANG_DAMAGE, 
                      1, 
-                     OW1_MCCREE_FLASHBANG_AOE_RADIUS, 
+                     OW1_CASSIDY_FLASHBANG_AOE_RADIUS, 
                      DynamicEffect.BAD_EXPLOSION, 
                      DynamicEffect.EXPLOSION_SOUND, 
                      0, 
-                     OW1_MCCREE_FLASHBANG_SPEED, 
-                     OW1_MCCREE_FLASHBANG_RANGE/OW1_MCCREE_FLASHBANG_SPEED, 
+                     OW1_CASSIDY_FLASHBANG_SPEED, 
+                     OW1_CASSIDY_FLASHBANG_RANGE/OW1_CASSIDY_FLASHBANG_SPEED, 
                      0, 
                      0, 
                      1)
-    eventPlayer.setAbilityCooldown(Button.ABILITY_2, OW1_MCCREE_FLASHBANG_COOLDOWN_TIME)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, OW1_CASSIDY_FLASHBANG_COOLDOWN)
 
 
 rule "[mccree.opy]: Stun flashed enemy":
@@ -50,4 +50,4 @@ rule "[mccree.opy]: Stun flashed enemy":
     @Hero mccree
     @Condition eventAbility == 0
 
-    victim.setStatusEffect(eventPlayer, Status.STUNNED, OW1_MCCREE_FLASHBANG_STUN_DURATION)
+    victim.setStatusEffect(eventPlayer, Status.STUNNED, OW1_CASSIDY_FLASHBANG_STUN_DURATION)

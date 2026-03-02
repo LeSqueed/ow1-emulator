@@ -72,7 +72,7 @@ rule "[orisa/barrier.opy]: Trigger Projectile Barrier ability":
     @Condition eventPlayer.isHoldingButton(Button.ABILITY_2)
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_2) == 0
 
-    eventPlayer.setAbilityCooldown(Button.ABILITY_2, OW1_ORISA_PROJECTILE_BARRIER_COOLDOWN_TIME)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, OW1_ORISA_PROJECTILE_BARRIER_COOLDOWN)
 
     throwBarrier()
     destroyBarrier()
@@ -87,7 +87,7 @@ def throwBarrier(): # Select shield position and orientation
     eventPlayer._barrier_seed_v0 = OW1_ORISA_BARRIER_PROJECTILE_SPEED * eventPlayer.getFacingDirection()
     eventPlayer._barrier_seed_p0 = eventPlayer.getEyePosition()
     eventPlayer.barrier_seed_t = 0
-    chase(eventPlayer.barrier_seed_t, OW1_ORISA_PROJECTILE_BARRIER_COOLDOWN_TIME, rate=1, ChaseReeval.DESTINATION_AND_RATE)
+    chase(eventPlayer.barrier_seed_t, OW1_ORISA_PROJECTILE_BARRIER_COOLDOWN, rate=1, ChaseReeval.DESTINATION_AND_RATE)
     eventPlayer.barrier_seed_velocity = eventPlayer._barrier_seed_v0
     chase(eventPlayer.barrier_seed_velocity, getBarrierVelocity(eventPlayer.barrier_seed_t), rate=9999, ChaseReeval.DESTINATION_AND_RATE)
     eventPlayer.barrier_seed_position = eventPlayer._barrier_seed_p0
@@ -105,7 +105,7 @@ def throwBarrier(): # Select shield position and orientation
                                  null, \
                                  null, \
                                  false).getHitPosition()) \ 
-                         < 0.5), OW1_ORISA_PROJECTILE_BARRIER_COOLDOWN_TIME)
+                         < 0.5), OW1_ORISA_PROJECTILE_BARRIER_COOLDOWN)
     
     # Freeze barrier projectile
     stopChasingVariable(eventPlayer.barrier_seed_t)
@@ -121,7 +121,7 @@ def throwBarrier(): # Select shield position and orientation
     eventPlayer._barrier_seed_v0 = 0.03 * reflection(eventPlayer.barrier_seed_velocity, eventPlayer._seed_hit_surface_normal)
     eventPlayer._barrier_seed_p0 = eventPlayer.barrier_seed_position
     eventPlayer.barrier_seed_t = 0
-    chase(eventPlayer.barrier_seed_t, OW1_ORISA_PROJECTILE_BARRIER_COOLDOWN_TIME, rate=1, ChaseReeval.DESTINATION_AND_RATE)
+    chase(eventPlayer.barrier_seed_t, OW1_ORISA_PROJECTILE_BARRIER_COOLDOWN, rate=1, ChaseReeval.DESTINATION_AND_RATE)
     eventPlayer.barrier_seed_velocity = eventPlayer._barrier_seed_v0
     chase(eventPlayer.barrier_seed_velocity, getBarrierVelocity(eventPlayer.barrier_seed_t), rate=9999, ChaseReeval.DESTINATION_AND_RATE)
     eventPlayer.barrier_seed_position = eventPlayer._barrier_seed_p0
@@ -135,7 +135,7 @@ def throwBarrier(): # Select shield position and orientation
                                  null, \
                                  null, \
                                  false).getHitPosition()) \ 
-                         < 0.5), OW1_ORISA_PROJECTILE_BARRIER_COOLDOWN_TIME)
+                         < 0.5), OW1_ORISA_PROJECTILE_BARRIER_COOLDOWN)
     
     # Freeze barrier projectile
     stopChasingVariable(eventPlayer.barrier_seed_t)

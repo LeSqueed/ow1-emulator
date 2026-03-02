@@ -14,7 +14,6 @@ playervar reset_pvar
 #!defineMember _status_reset reset_pvar[10]
 #!defineMember _frenemy_reset reset_pvar[11]
 #!defineMember _ult_charge_reset reset_pvar[12]
-#!defineMember _self_healing_reset reset_pvar[13]
 #!defineMember _ability_reset reset_pvar[14]
 
 subroutine clearCustomHp
@@ -24,7 +23,6 @@ subroutine resetStats
 subroutine resetStatuses
 subroutine resetFrenemies
 subroutine resetUltCharge
-subroutine resetSelfHealing
 subroutine resetPerkCost
 
 macro isResetComplete(player):
@@ -33,7 +31,6 @@ macro isResetComplete(player):
  and player._status_reset \
  and player._frenemy_reset \
  and player._ult_charge_reset \
- and player._self_healing_reset \
  and player._ability_reset)
 
 def resetHero():
@@ -45,7 +42,6 @@ def resetHero():
     async(resetFrenemies, AsyncBehavior.RESTART)
     async(resetUltCharge, AsyncBehavior.RESTART)
     async(resetPerkCost, AsyncBehavior.RESTART)
-    async(resetSelfHealing, AsyncBehavior.RESTART)
     async(enableAllAbilities, AsyncBehavior.RESTART)
 
     wait() # wait at least 1 tick

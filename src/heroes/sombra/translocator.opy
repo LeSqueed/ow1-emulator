@@ -55,7 +55,7 @@ rule "[sombra/translocator.opy]: Bind Ability 2 to translocator":
     @Condition not eventPlayer._is_using_translocator
     waitUntil(eventPlayer.isHoldingButton(Button.ABILITY_2), Math.INFINITY)
 
-    eventPlayer.setAbilityCooldown(Button.ABILITY_2, OW1_SOMBRA_TRANSLOCATOR_COOLDOWN_TIME)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, OW1_SOMBRA_TRANSLOCATOR_COOLDOWN)
     destroyTranslocator(eventPlayer)
     async(throwTranslocator(), AsyncBehavior.RESTART)
     waitUntil(not eventPlayer.isHoldingButton(Button.ABILITY_2), Math.INFINITY)
@@ -84,7 +84,7 @@ def throwTranslocator():
     eventPlayer.transloc_v0 = OW1_SOMBRA_TRANSLOCATOR_PROJECTILE_SPEED * eventPlayer.getFacingDirection()
     eventPlayer.transloc_p0 = eventPlayer.getEyePosition()
     eventPlayer.transloc_time = 0
-    chase(eventPlayer.transloc_time, OW1_SOMBRA_TRANSLOCATOR_COOLDOWN_TIME, rate=1, ChaseReeval.DESTINATION_AND_RATE)
+    chase(eventPlayer.transloc_time, OW1_SOMBRA_TRANSLOCATOR_COOLDOWN, rate=1, ChaseReeval.DESTINATION_AND_RATE)
     eventPlayer.trasnloc_velocity = eventPlayer.transloc_v0
     chase(eventPlayer.trasnloc_velocity, getTranslocVelocity(eventPlayer.transloc_time), rate=9999, ChaseReeval.DESTINATION_AND_RATE)
     eventPlayer.transloc_position = eventPlayer.transloc_p0
@@ -102,7 +102,7 @@ def throwTranslocator():
                                  null, \
                                  null, \
                                  false).getHitPosition()) \ 
-                         < 0.5), OW1_SOMBRA_TRANSLOCATOR_COOLDOWN_TIME)
+                         < 0.5), OW1_SOMBRA_TRANSLOCATOR_COOLDOWN)
     
     # Freeze translocator projectile
     stopChasingVariable(eventPlayer.transloc_time)
@@ -121,7 +121,7 @@ def throwTranslocator():
     eventPlayer.transloc_v0 = 0.03 * reflection(eventPlayer.trasnloc_velocity, eventPlayer._seed_hit_surface_normal_sombra)
     eventPlayer.transloc_p0 = eventPlayer.transloc_position
     eventPlayer.transloc_time = 0
-    chase(eventPlayer.transloc_time, OW1_SOMBRA_TRANSLOCATOR_COOLDOWN_TIME, rate=1, ChaseReeval.DESTINATION_AND_RATE)
+    chase(eventPlayer.transloc_time, OW1_SOMBRA_TRANSLOCATOR_COOLDOWN, rate=1, ChaseReeval.DESTINATION_AND_RATE)
     eventPlayer.trasnloc_velocity = eventPlayer.transloc_v0
     chase(eventPlayer.trasnloc_velocity, getTranslocVelocity(eventPlayer.transloc_time), rate=9999, ChaseReeval.DESTINATION_AND_RATE)
     eventPlayer.transloc_position = eventPlayer.transloc_p0
@@ -135,7 +135,7 @@ def throwTranslocator():
                                  null, \
                                  null, \
                                  false).getHitPosition()) \ 
-                         < 0.5), OW1_SOMBRA_TRANSLOCATOR_COOLDOWN_TIME)
+                         < 0.5), OW1_SOMBRA_TRANSLOCATOR_COOLDOWN)
     
     # Freeze translocator projectile
     stopChasingVariable(eventPlayer.transloc_time)

@@ -1,6 +1,9 @@
 #!mainFile "../dev_main.opy"
 
 globalvar DEBUG_MODE = createWorkshopSetting(bool, "Dev Tools", "debug mode", true)
+globalvar _debug_dps_window = createWorkshopSetting(int[1:200], "Dev Tools", "DPS Window (seconds)", 20)
+globalvar _debug_bot
+
 #!define STAT_KEEP_ALIVE (2)
 #!define STAT_SPACING (0.5)
 
@@ -9,6 +12,15 @@ playervar debug_pvar
 #!define _last_damage_received debug_pvar[1]
 #!define _total_healing_received debug_pvar[2]
 #!define _last_healing_received debug_pvar[3]
+playervar _total_compensation_healed
+# Tracks null-healer healing amounts from damage compensation (OW2 -> OW1 adjustment)
+
+playervar _dps_timer
+playervar _dps_damage
+playervar _dps_healing
+playervar _dps_active
+playervar _debug_float_pos
+playervar _debug_float_id
 
 
 rule "[utilities/debug.opy] Disable Inspector for performance":
@@ -158,8 +170,9 @@ rule "[utilities/debug.opy]: do something on interact":
     @Event eachPlayer
     @Condition DEBUG_MODE
     @Condition eventPlayer.isHoldingButton(Button.INTERACT)
+    @Condition not eventPlayer.isHoldingButton(Button.CROUCH)
 
-    damage(eventPlayer, null, 25)
+    damage(eventPlayer, eventPlayer, 25)
     # eventPlayer.setHealth(1)
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, 0)
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, 0)
@@ -195,10 +208,10 @@ rule "[utilities/debug.opy]: Show Player Damage/Healing":
         Color.YELLOW, 
         SpecVisibility.DEFAULT)
 
-    # total damage
+    # total damage (raw OW2)
     createInWorldText(
         getAllPlayers() if eventPlayer._total_damage_received > 0 else null, 
-        eventPlayer._total_damage_received, 
+        "Raw {:.0f}".format(eventPlayer._total_damage_received), 
         eventPlayer.getEyePosition() + 3 * STAT_SPACING * Vector.UP, 
         2, 
         Clip.NONE, 
@@ -206,15 +219,48 @@ rule "[utilities/debug.opy]: Show Player Damage/Healing":
         Color.RED, 
         SpecVisibility.DEFAULT)
 
+    # total adjusted damage (OW1 - compensation subtracted from raw OW2)
+    createInWorldText(
+        getAllPlayers() if eventPlayer._total_damage_received > 0 and eventPlayer._total_compensation_healed > 0 else null,
+        "Adj {:.0f}".format(eventPlayer._total_damage_received - eventPlayer._total_compensation_healed),
+        eventPlayer.getEyePosition() + 3 * STAT_SPACING * Vector.UP,
+        2,
+        Clip.NONE,
+        WorldTextReeval.VISIBILITY_POSITION_AND_STRING,
+        Color.YELLOW,
+        SpecVisibility.DEFAULT)
+
+    # total healing (raw OW2)
+    createInWorldText(
+        getAllPlayers() if eventPlayer._total_healing_received > 0 else null,
+        "Raw {:.0f}".format(eventPlayer._total_healing_received),
+        eventPlayer.getEyePosition() + 4 * STAT_SPACING * Vector.UP,
+        2,
+        Clip.NONE,
+        WorldTextReeval.VISIBILITY_POSITION_AND_STRING,
+        Color.GREEN,
+        SpecVisibility.DEFAULT)
+
     # total healing
     createInWorldText(
-        getAllPlayers() if eventPlayer._total_healing_received > 0 else null, 
-        eventPlayer._total_healing_received, 
-        eventPlayer.getEyePosition() + 4 * STAT_SPACING * Vector.UP, 
-        2, 
-        Clip.NONE, 
-        WorldTextReeval.VISIBILITY_POSITION_AND_STRING, 
-        Color.YELLOW, 
+        getAllPlayers() if eventPlayer._total_healing_received > 0 else null,
+        eventPlayer._total_healing_received,
+        eventPlayer.getEyePosition() + 4 * STAT_SPACING * Vector.UP,
+        2,
+        Clip.NONE,
+        WorldTextReeval.VISIBILITY_POSITION_AND_STRING,
+        Color.YELLOW,
+        SpecVisibility.DEFAULT)
+
+    # passive regen
+    createInWorldText(
+        getAllPlayers() if eventPlayer._regen_display_timeout > 0 else null,
+        "+{} regen".format(round(eventPlayer._regen_display)),
+        eventPlayer.getEyePosition() + 5 * STAT_SPACING * Vector.UP,
+        2,
+        Clip.NONE,
+        WorldTextReeval.VISIBILITY_POSITION_AND_STRING,
+        Color.GREEN,
         SpecVisibility.DEFAULT)
 
 
@@ -231,14 +277,135 @@ rule "[utilities/debug.opy]: Debug damage instance":
     victim._total_damage_received = 0
 
 
-rule "[utilities/debug.opy]: Debug healing instance":
+rule "[utilities/debug.opy]: Debug healing instance with correction tracking":
     @Event playerReceivedHealing
     @Condition DEBUG_MODE
 
     printLog("healer={}, healee={}, ability={}, amount={}".format(healer, healee, eventAbility, eventHealing))
-    
+
     healee._last_healing_received = eventHealing
     healee._total_healing_received += eventHealing
     wait(STAT_KEEP_ALIVE, Wait.RESTART_WHEN_TRUE)
     healee._last_healing_received = 0
     healee._total_healing_received = 0
+
+
+rule "[utilities/debug.opy]: Debug correction damage instance (same-team damage)":
+    @Event playerTookDamage
+    @Condition DEBUG_MODE
+    @Condition attacker == null
+
+    wait(STAT_KEEP_ALIVE, Wait.RESTART_WHEN_TRUE)
+
+
+rule "[utilities/debug.opy]: Track compensation heals (null-healer OW2->OW1 offset)":
+    @Event playerReceivedHealing
+    @Condition DEBUG_MODE
+    @Condition healer == null
+
+    # Null-healer healing - this is damage compensaton from scaled OW1 damage
+    healee._total_compensation_healed += eventHealing
+    wait(STAT_KEEP_ALIVE, Wait.RESTART_WHEN_TRUE)
+    healee._total_compensation_healed = 0
+
+
+# ---- Features ported from FSJQS-6v6 ----
+
+rule "[utilities/debug.opy]: Keybind hints":
+    @Event global
+    @Condition DEBUG_MODE == true
+
+    hudSubtext(getAllPlayers(), "[Crouch]+[Interact] -- Start/reset DPS timer", HudPosition.LEFT, 10, Color.GREEN, HudReeval.VISIBILITY_AND_STRING)
+    hudSubtext(getAllPlayers(), "[Crouch]+[Jump] -- Spawn bot", HudPosition.LEFT, 11, Color.TURQUOISE, HudReeval.VISIBILITY_AND_STRING)
+    hudSubtext(getAllPlayers(), "[Crouch]+[Melee] -- Remove all bots", HudPosition.LEFT, 12, Color.ORANGE, HudReeval.VISIBILITY_AND_STRING)
+    hudSubtext(getAllPlayers(), "Hold [Melee] (1s) -- Change hero", HudPosition.LEFT, 13, Color.ROSE, HudReeval.VISIBILITY_AND_STRING)
+
+
+rule "[utilities/debug.opy]: DPS/HPS player HUD":
+    @Event eachPlayer
+    @Condition DEBUG_MODE == true
+
+    chaseAtRate(eventPlayer._dps_timer, 0, 1)
+    hudText(eventPlayer, eventPlayer._dps_damage, "Damage dealt", null, HudPosition.LEFT, 13, Color.YELLOW, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
+    hudText(eventPlayer, eventPlayer._dps_damage / max(_debug_dps_window - eventPlayer._dps_timer, 0.001), "DPS", null, HudPosition.LEFT, 14, Color.RED, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
+    hudText(eventPlayer, eventPlayer._dps_healing, "Healing dealt", null, HudPosition.LEFT, 15, Color.YELLOW, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
+    hudText(eventPlayer, eventPlayer._dps_healing / max(_debug_dps_window - eventPlayer._dps_timer, 0.001), "HPS", null, HudPosition.LEFT, 16, Color.GREEN, Color.WHITE, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
+    hudHeader(eventPlayer, "Speed: {0}".format(eventPlayer.getSpeed()), HudPosition.TOP, 1, Color.WHITE, HudReeval.VISIBILITY_AND_STRING)
+
+
+rule "[utilities/debug.opy]: Reset DPS/HPS on crouch+interact":
+    @Event eachPlayer
+    @Condition DEBUG_MODE == true
+    @Condition eventPlayer.isHoldingButton(Button.INTERACT) == true
+    @Condition eventPlayer.isHoldingButton(Button.CROUCH) == true
+
+    eventPlayer._dps_active = true
+    eventPlayer._dps_timer = _debug_dps_window
+    eventPlayer._dps_damage = 0
+    eventPlayer._dps_healing = 0
+
+
+rule "[utilities/debug.opy]: Track DPS damage":
+    @Event playerDealtDamage
+    @Condition DEBUG_MODE == true
+    @Condition victim != attacker
+    @Condition eventPlayer._dps_active == true
+
+    destroyInWorldText(eventPlayer._debug_float_id)
+    eventPlayer._debug_float_pos = victim.getEyePosition()
+    createInWorldText(eventPlayer, eventDamage, eventPlayer._debug_float_pos, 0.85 + eventDamage / 30, Clip.SURFACES, WorldTextReeval.VISIBILITY_POSITION_AND_STRING)
+    eventPlayer._debug_float_id = getLastCreatedText()
+    chaseAtRate(eventPlayer._debug_float_pos, victim.getEyePosition() + Vector.UP, 0.9, ChaseRateReeval.NONE)
+    eventPlayer._dps_damage += eventDamage
+
+
+rule "[utilities/debug.opy]: Track HPS healing":
+    @Event playerDealtHealing
+    @Condition DEBUG_MODE == true
+    @Condition healee != healer
+    @Condition eventPlayer._dps_active == true
+
+    destroyInWorldText(eventPlayer._debug_float_id)
+    eventPlayer._debug_float_pos = healee.getEyePosition()
+    createInWorldText(eventPlayer, eventHealing, eventPlayer._debug_float_pos, 0.85 + eventHealing / 30, Clip.SURFACES, WorldTextReeval.VISIBILITY_POSITION_AND_STRING, Color.YELLOW)
+    eventPlayer._debug_float_id = getLastCreatedText()
+    chaseAtRate(eventPlayer._debug_float_pos, healee.getEyePosition() + Vector.UP, 0.9, ChaseRateReeval.NONE)
+    eventPlayer._dps_healing += eventHealing
+
+
+rule "[utilities/debug.opy]: Spawn bot":
+    @Event eachPlayer
+    @Condition DEBUG_MODE == true
+    @Condition eventPlayer.isHoldingButton(Button.CROUCH) == true
+    @Condition eventPlayer.isHoldingButton(Button.JUMP) == true
+
+    createDummy(Hero.ANA, getOppositeTeam(eventPlayer.getTeam()), -1, eventPlayer.getPosition(), eventPlayer.getFacingDirection())
+    _debug_bot = getLastCreatedEntity()
+    wait(0.1)
+    _debug_bot.setMaxHealth(1000)
+    _debug_bot.startHealingOverTime(null, Math.INFINITY, 50)
+
+
+rule "[utilities/debug.opy]: Remove all bots":
+    @Event eachPlayer
+    @Condition DEBUG_MODE == true
+    @Condition eventPlayer.isHoldingButton(Button.CROUCH) == true
+    @Condition eventPlayer.isHoldingButton(Button.MELEE) == true
+
+    destroyAllDummies()
+    destroyInWorldText(eventPlayer._debug_float_id)
+
+
+rule "[utilities/debug.opy]: Change hero":
+    @Event eachPlayer
+    @Condition DEBUG_MODE == true
+    @Condition eventPlayer.isHoldingButton(Button.MELEE) == true
+
+    wait(1, Wait.ABORT_WHEN_FALSE)
+    eventPlayer._debug_float_pos = eventPlayer.getPosition()
+    eventPlayer.setAllowedHeroes(getAllHeroes().exclude(eventPlayer.getCurrentHero()))
+    wait(0.1)
+    eventPlayer.setAllowedHeroes(getAllHeroes())
+    destroyInWorldText(eventPlayer._debug_float_id)
+    waitUntil(eventPlayer.hasSpawned(), Math.INFINITY)
+    eventPlayer.teleport(eventPlayer._debug_float_pos)

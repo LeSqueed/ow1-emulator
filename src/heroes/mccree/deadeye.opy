@@ -18,9 +18,9 @@ rule "[mccree/deadeye.opy]: OW1 deadeye damage + remove OW2 damage reduction dur
 def startOW1Deadeye():
     @Name "[mccree/deadeye.opy]: startOW1Deadeye()"
 
-    eventPlayer.setDamageDealt(percent(OW1_MCCREE_DEADEYE_DAMAGE/OW2_MCCREE_DEADEYE_DAMAGE))
-    eventPlayer.setDamageReceived(percent(100/(100-OW2_MCCREE_DEADEYE_DAMAGE_REDUCTION_MAX)))
-    wait(OW2_MCCREE_DEADEYE_PENALTY_DURATION)
+    eventPlayer.setDamageDealt(percent(OW1_CASSIDY_DEADEYE_DAMAGE/OW2_CASSIDY_DEADEYE_DAMAGE))
+    eventPlayer.setDamageReceived(percent(100/(100-OW2_CASSIDY_DEADEYE_DAMAGE_REDUCTION_MAX)))
+    wait(OW2_CASSIDY_DEADEYE_PENALTY_DURATION)
     if not eventPlayer.isUsingUltimate(): return
-    eventPlayer.setDamageReceived(percent(100/(100-OW2_MCCREE_DEADEYE_DAMAGE_REDUCTION_MIN)))
-    eventPlayer.setMoveSpeed(percent(OW2_MCCREE_DEADEYE_MOVE_SPEED_MIN/OW2_MCCREE_DEADEYE_MOVE_SPEED_MAX))
+    eventPlayer.setDamageReceived(percent(100/(100-OW2_CASSIDY_DEADEYE_DAMAGE_REDUCTION_MIN)))
+    eventPlayer.setMoveSpeed(percent(OW2_CASSIDY_DEADEYE_MOVE_SPEED_MIN/OW2_CASSIDY_DEADEYE_MOVE_SPEED_MAX))

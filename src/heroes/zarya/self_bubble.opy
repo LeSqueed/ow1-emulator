@@ -48,7 +48,7 @@ Below HUD is tuned for 16:9 aspect ratio monitors (typical PC Overwatch setup).
 #     eventPlayer.setAbilityCharge(Button.ABILITY_1, 2)
 #     waitUntil(not eventPlayer.isUsingAbility1(), OW1_ZARYA_BUBBLE_DURATION) # wait bubble duration
 #     eventPlayer.setAbility1Enabled(false)
-#     eventPlayer.self_bubble_cooldown = OW1_ZARYA_PARTICLE_BARRIER_COOLDOWN_TIME
+#     eventPlayer.self_bubble_cooldown = OW1_ZARYA_PARTICLE_BARRIER_COOLDOWN
 #     eventPlayer.allowButton(Button.ABILITY_1)
 #     chase(eventPlayer.self_bubble_cooldown, 0, rate=1, ChaseReeval.NONE)
 

@@ -3,12 +3,6 @@
 playervar repulsed_victims
 playervar repulsor_wall_victims
 
-subroutine initSonicRepulsors
-
-def initSonicRepulsors():
-    eventPlayer.repulsed_victims = []
-    eventPlayer.repulsor_wall_victims = []
-
 rule "[domina/sonic_repulsors.opy]: Initialize sonic repulsors":
     @Event eachPlayer
     @Hero domina
@@ -21,7 +15,7 @@ rule "[domina/sonic_repulsors.opy]: Initialize sonic repulsors":
 rule "[domina/sonic_repulsors.opy]: Find wall impacted victims":
     @Event playerDealtDamage
     @Hero domina
-    @Condition eventAbility == Button.PRIMARY_FIRE
+    @Condition eventAbility == Button.ABILITY_1
     @Condition victim in attacker.repulsed_victims
     @Condition victim not in attacker.repulsor_wall_victims
 
@@ -35,7 +29,7 @@ rule "[domina/sonic_repulsors.opy]: Find repulsed victims":
     @Condition victim not in attacker.repulsed_victims
 
     attacker.repulsed_victims.append(victim)
-    damage(victim, attacker, OW1_DOMINA_REPULSOR_BASE_DAMAGE)
+    damage(victim, attacker, OW1_DOMINA_SONIC_REPULSORS_BASE_DAMAGE)
 
     #ToDo: Restore Domina shields based on damage.
 

@@ -6,4 +6,4 @@ rule "[symmetra/teleporter.opy]: Set default teleporter cooldown":
     @Hero symmetra
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_2) > 0
 
-    eventPlayer.setAbilityCooldown(Button.ABILITY_2, OW1_SYMMETRA_TELEPORTER_COOLDOWN_TIME)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_2, OW1_SYMMETRA_TELEPORTER_COOLDOWN)

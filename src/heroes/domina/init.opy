@@ -11,3 +11,5 @@ def initDomina():
 
     setCustomHp(OW1_DOMINA_HEALTH, OW1_DOMINA_ARMOR, OW1_DOMINA_SHIELDS)
     setUltCost(OW1_DOMINA_ULT_COST)
+    eventPlayer.repulsed_victims = []
+    eventPlayer.repulsor_wall_victims = []

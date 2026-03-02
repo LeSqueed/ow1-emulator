@@ -75,8 +75,8 @@ rule "[bastion/repair.opy]: Activate self-repair":
 
     # resource bar vfx
     if eventPlayer._self_repair_resource_gui == null:
-        progressBarHud(eventPlayer if eventPlayer.self_repair_time_left < OW1_BASTION_MAX_SELF_REPAIR_DURATION else null, 
-                        roundedPercent(eventPlayer.self_repair_time_left/OW1_BASTION_MAX_SELF_REPAIR_DURATION), 
+        progressBarHud(eventPlayer if eventPlayer.self_repair_time_left < OW1_BASTION_SELF_REPAIR_MAX_DURATION else null, 
+                        roundedPercent(eventPlayer.self_repair_time_left/OW1_BASTION_SELF_REPAIR_MAX_DURATION), 
                         "Self-Repair", 
                         HudPosition.TOP, 
                         1, 
@@ -103,18 +103,18 @@ rule "[bastion/repair.opy]: Deactivate self-repair":
     hideSelfRepairRing()
 
     stopChasingVariable(eventPlayer.self_repair_time_left) # Stop resource depletion
-    wait(OW1_BASTION_SELF_REPAIR_COOLDOWN_TIME, Wait.ABORT_WHEN_FALSE) # Wait 1 second cooldown before recharging heal resource
+    wait(OW1_BASTION_SELF_REPAIR_COOLDOWN, Wait.ABORT_WHEN_FALSE) # Wait 1 second cooldown before recharging heal resource
 
     chase(eventPlayer.self_repair_time_left, \
-          OW1_BASTION_MAX_SELF_REPAIR_DURATION, \
-          rate=OW1_BASTION_MAX_SELF_REPAIR_DURATION/OW1_BASTION_SELF_REPAIR_RECHARGE_DURATION, \
+          OW1_BASTION_SELF_REPAIR_MAX_DURATION, \
+          rate=OW1_BASTION_SELF_REPAIR_MAX_DURATION/OW1_BASTION_SELF_REPAIR_RECHARGE_DURATION, \
           ChaseReeval.DESTINATION_AND_RATE) # Start recharging
 
 
 rule "[bastion/repair.opy]: Hide self repair resource GUI":
     @Event eachPlayer
     @Hero bastion
-    @Condition eventPlayer.self_repair_time_left >= OW1_BASTION_MAX_SELF_REPAIR_DURATION
+    @Condition eventPlayer.self_repair_time_left >= OW1_BASTION_SELF_REPAIR_MAX_DURATION
 
     hideSelfRepairResource()
 

@@ -16,4 +16,4 @@ def initHanzo():
 #     @Hero hanzo
 #     @Condition eventAbility in [Button.PRIMARY_FIRE, Button.ABILITY_1]
 
-#     damage(victim, attacker, eventDamage*(OW1_HANZO_ARROW_DAMAGE/OW2_HANZO_ARROW_DAMAGE)-eventDamage)
+#     damage(victim, attacker, eventDamage*(OW1_HANZO_STORM_BOW_DAMAGE/OW2_HANZO_STORM_BOW_DAMAGE)-eventDamage)

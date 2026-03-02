@@ -1,33 +1,21 @@
 #!mainFile "../../dev_main.opy"
 
-#!define DOMINA_BEAM_DURATION 0.8
-
-playervar beamPhase
-playervar beamTimer
-
-rule "[domina/photon_magnum.opy]: Track beam phase start":
-    @Event eachPlayer
+rule "[domina/photon_magnum.opy]: Scale beam damage":
+    @Event playerDealtDamage
     @Hero domina
-    @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) == true
-    @Condition eventPlayer.beamPhase == false
-    
-    eventPlayer.beamPhase = true
-    eventPlayer.beamTimer = 0
-    chaseOverTime(eventPlayer.beamTimer, DOMINA_BEAM_DURATION, DOMINA_BEAM_DURATION, ChaseTimeReeval.NONE)
+    @Condition eventAbility == Button.PRIMARY_FIRE
+    @Condition eventDamage < OW2_DOMINA_PHOTON_MAGNUM_SHOT_DAMAGE
 
-rule "[domina/photon_magnum.opy]: Transition to hitscan phase when charge completes":
-    @Event eachPlayer
-    @Hero domina
-    @Condition eventPlayer.beamTimer >= DOMINA_BEAM_DURATION
-    
-    stopChasingVariable(eventPlayer.beamTimer)
-    eventPlayer.beamPhase = false
+    heal(victim, null, eventDamage - eventDamage * (OW1_DOMINA_PHOTON_MAGNUM_BEAM_DAMAGE/OW2_DOMINA_PHOTON_MAGNUM_BEAM_DAMAGE))
 
-rule "[domina/photon_magnum.opy]: Reset beam phase on release":
-    @Event eachPlayer
+
+rule "[domina/photon_magnum.opy]: Scale shot damage":
+    @Event playerDealtDamage
     @Hero domina
-    @Condition eventPlayer.isHoldingButton(Button.PRIMARY_FIRE) == false
-    
-    stopChasingVariable(eventPlayer.beamTimer)
-    eventPlayer.beamTimer = 0
-    eventPlayer.beamPhase = false
+    @Condition eventAbility != Button.ABILITY_1
+    @Condition eventAbility != Button.ABILITY_2
+    @Condition eventAbility != Button.ULTIMATE
+    @Condition eventAbility != Button.MELEE
+    @Condition eventDamage >= OW2_DOMINA_PHOTON_MAGNUM_SHOT_DAMAGE
+
+    heal(victim, null, eventDamage - eventDamage * (OW1_DOMINA_PHOTON_MAGNUM_SHOT_DAMAGE/OW2_DOMINA_PHOTON_MAGNUM_SHOT_DAMAGE))

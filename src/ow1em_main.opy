@@ -22,14 +22,13 @@
 #!include "utilities/anti_crash.opy"
 
 # OW1 logic
-# Remove damage passive
-# !include "passives/damage/damage_passive.opy"
+#!include "passives/damage/damage_passive.opy"
 # Remove tank passive
 # !include "passives/tank/headshot.opy"
 # !include "passives/tank/knockback.opy"
 #!include "passives/tank/ult_charge.opy"
 # Remove support passive
-#!include "passives/support/self_heal.opy"
+# #!include "passives/support/self_heal.opy"
 # Perk utility
 # !include "passives/perk.opy"
 
@@ -47,6 +46,7 @@
 #!include "heroes/hanzo/init.opy"
 # !include "heroes/hazard/init.opy"
 # !include "heroes/illari/init.opy"
+#!include "heroes/jetpack_cat/init.opy"
 # !include "heroes/junkerqueen/init.opy"
 #!include "heroes/junkrat/init.opy"
 # !include "heroes/juno/init.opy"

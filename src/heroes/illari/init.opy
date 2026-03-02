@@ -12,7 +12,7 @@ def initIllari():
 
     #removePassiveHealing()
 
-    setBaseDamage(eventPlayer, OW1_ILLARI_SUNSTRUCK_DAMAGE/OW2_ILLARI_SUNSTRUCK_DAMAGE)
+    setBaseDamage(eventPlayer, OW1_ILLARI_CAPTIVE_SUN_DAMAGE/OW2_ILLARI_CAPTIVE_SUN_DAMAGE)
 
 
 
@@ -31,4 +31,4 @@ rule "[illari/init.opy]: Correct Pylon self healing":
     @Hero illari
     @Condition healee == healer
 
-    heal(healee, null, eventHealing/OW2_ILLARI_PYLON_SELF_HEAL - eventHealing)
+    heal(healee, null, eventHealing/OW2_ILLARI_HEALING_PYLON_SELF_HEAL - eventHealing)

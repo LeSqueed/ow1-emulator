@@ -7,7 +7,7 @@ rule "[winston/leap.opy]: Override leap cooldown during primal":
     @Condition eventPlayer.isUsingUltimate()
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_1) > 0
     
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, OW1_WINSTON_PRIMAL_JUMP_PACK_COOLDOWN_TIME)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_1, OW1_WINSTON_PRIMAL_JUMP_PACK_COOLDOWN)
 
 
 rule "[winston/leap.opy]: OW1 Winston jump pack damage":
@@ -24,4 +24,4 @@ rule "[winston/leap.opy]: OW1 Winston Leap Cooldown":
     @Condition not eventPlayer.isUsingUltimate()
     @Condition eventPlayer.getAbilityCooldown(Button.ABILITY_1) > 0
 
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, OW1_WINSTON_JUMP_PACK_COOLDOWN_TIME)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_1, OW1_WINSTON_JUMP_PACK_COOLDOWN)

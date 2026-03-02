@@ -10,7 +10,7 @@ rule "[bastion/sentry.opy]: Initialize sentry mode":
 
     eventPlayer.current_configuration = Configuration.SENTRY
 
-    setBaseDamage(eventPlayer, OW1_BASTION_SENTRY_CONFIG_DAMAGE/OW2_BASTION_ASSAULT_CONFIG_DAMAGE)
+    setBaseDamage(eventPlayer, OW1_BASTION_SENTRY_DAMAGE/OW2_BASTION_ASSAULT_DAMAGE)
     eventPlayer.setStatusEffect(null, Status.ROOTED, Math.INFINITY)
     eventPlayer.setKnockbackReceived(0)
 

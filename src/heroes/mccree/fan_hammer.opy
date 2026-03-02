@@ -6,4 +6,4 @@
 #     @Hero cassidy
 #     @Condition eventAbility == Button.SECONDARY_FIRE
 
-#     damage(victim, attacker, eventDamage*(OW1_MCCREE_FAN_THE_HAMMER_DAMAGE/OW2_MCCREE_FAN_THE_HAMMER_DAMAGE) - eventDamage)
+#     damage(victim, attacker, eventDamage*(OW1_CASSIDY_FAN_THE_HAMMER_DAMAGE/OW2_CASSIDY_FAN_THE_HAMMER_DAMAGE) - eventDamage)

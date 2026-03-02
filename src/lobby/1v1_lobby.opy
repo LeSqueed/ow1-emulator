@@ -56,7 +56,7 @@ settings {
         "allTeams": {
             "ana": {
                 "health%": percent(OW1_ANA_HEALTH/OW2_ANA_HEALTH),
-                "ability1Cooldown%": percent(OW1_ANA_SLEEP_DART_COOLDOWN_TIME/OW2_ANA_SLEEP_DART_COOLDOWN_TIME),
+                "ability1Cooldown%": percent(OW1_ANA_SLEEP_DART_COOLDOWN/OW2_ANA_SLEEP_DART_COOLDOWN),
                 "ability2Cooldown%": percent(OW1_ANA_BIOTIC_GRENADE_COOLDOWN/OW2_ANA_BIOTIC_GRENADE_COOLDOWN),
                 "ultGen%": percent(OW2_ANA_ULT_COST/OW1_ANA_ULT_COST)
             },
@@ -65,8 +65,8 @@ settings {
                 "ultGen%": percent(OW2_ASHE_ULT_COST/OW1_ASHE_ULT_COST)
             },
             "baptiste": {
-                "ability2Cooldown%": percent(OW1_BAPTISTE_LAMP_COOLDOWN_TIME/OW2_BAPTISTE_LAMP_COOLDOWN_TIME),
-                "health%": percent(OW1_BAPTISTE_LAMP_HP/OW2_BAPTISTE_LAMP_HP), # for immortality field hp
+                "ability2Cooldown%": percent(OW1_BAPTISTE_LAMP_COOLDOWN/OW2_BAPTISTE_LAMP_COOLDOWN),
+                "health%": percent(OW1_BAPTISTE_LAMP_HEALTH/OW2_BAPTISTE_LAMP_HEALTH), # for immortality field hp
                 "ultGen%": percent(OW2_BAPTISTE_ULT_COST/OW1_BAPTISTE_ULT_COST)
             },
             "bastion": {
@@ -74,20 +74,20 @@ settings {
                 "ultGen%": percent(OW2_BASTION_ULT_COST/OW1_BASTION_ULT_COST)
             },
             "brigitte": {
-                "health%": percent(OW1_BRIGITTE_BARRIER_HEALTH/OW2_BRIGITTE_BARRIER_HEALTH), # for barrier hp
+                "health%": percent(OW1_BRIGITTE_BARRIER_SHIELD_HEALTH/OW2_BRIGITTE_BARRIER_SHIELD_HEALTH), # for barrier hp
                 "shieldBashCooldown%": percent(OW1_BRIGITTE_SHIELD_BASH_COOLDOWN/OW2_BRIGITTE_SHIELD_BASH_COOLDOWN),
                 "shieldBashKb%": percent(OW1_BRIGITTE_SHIELD_BASH_KNOCKBACK/OW2_BRIGITTE_SHIELD_BASH_KNOCKBACK),
                 "ability2Cooldown%": percent(OW1_BRIGITTE_REPAIR_PACK_COOLDOWN/OW2_BRIGITTE_REPAIR_PACK_COOLDOWN),
                 "ultGen%": percent(OW2_BRIGITTE_ULT_COST/OW1_BRIGITTE_ULT_COST)
             },
             "cassidy": {
-                "health%": percent(OW1_MCCREE_HEALTH/OW2_MCCREE_HEALTH),
-                "ability2Cooldown%": percent(OW1_MCCREE_FLASHBANG_COOLDOWN/OW2_MCCREE_FLASHBANG_COOLDOWN),
-                "ultGen%": percent(OW2_MCCREE_ULT_COST/OW1_MCCREE_ULT_COST)
+                "health%": percent(OW1_CASSIDY_HEALTH/OW2_CASSIDY_HEALTH),
+                "ability2Cooldown%": percent(OW1_CASSIDY_FLASHBANG_COOLDOWN/OW2_CASSIDY_FLASHBANG_COOLDOWN),
+                "ultGen%": percent(OW2_CASSIDY_ULT_COST/OW1_CASSIDY_ULT_COST)
             },
             "doomfist": {
-                "health%": percent(OW2_DOOMFIST_BEST_DEFENSE/OW2_DOOMFIST_BEST_DEFENSE), # for shield hp
-                "ammoRegenerationTime%": percent(OW1_DOOMFIST_AMMO_REGEN/OW2_DOOMFIST_AMMO_REGEN),
+                "health%": percent(OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH/OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH), # for shield hp
+                "ammoRegenerationTime%": percent(OW1_DOOMFIST_HAND_CANNON_AMMO_REGEN/OW2_DOOMFIST_HAND_CANNON_AMMO_REGEN),
                 "secondaryFireKb%": 0,
                 "ability2Cooldown%": percent(OW1_DOOMFIST_SEISMIC_SLAM_COOLDOWN/OW2_DOOMFIST_SEISMIC_SLAM_COOLDOWN),
                 "ability1Cooldown%": percent(OW1_DOOMFIST_UPPERCUT_COOLDOWN_DEFAULT/OW2_DOOMFIST_POWER_BLOCK_COOLDOWN),
@@ -96,8 +96,8 @@ settings {
             "dva": {
                 "health%": percent(OW1_DVA_PILOT_HEALTH/OW2_DVA_PILOT_HEALTH), # for pilot dva hp
                 "secondaryFireMaximumTime%": percent(OW1_DVA_MATRIX_DURATION/OW2_DVA_MATRIX_DURATION),
-                "ability1Cooldown%": percent(OW1_DVA_BOOSTER_COOLDOWN_TIME/OW2_DVA_BOOSTER_COOLDOWN_TIME),
-                "ability2Cooldown%": percent(OW1_DVA_MICRO_MISSILES_COOLDOWN_TIME/OW2_DVA_MICRO_MISSILES_COOLDOWN_TIME),
+                "ability1Cooldown%": percent(OW1_DVA_BOOSTERS_COOLDOWN/OW2_DVA_BOOSTERS_COOLDOWN),
+                "ability2Cooldown%": percent(OW1_DVA_MICRO_MISSILES_COOLDOWN/OW2_DVA_MICRO_MISSILES_COOLDOWN),
                 "ultGen%": percent(OW2_DVA_ULT_COST/OW1_DVA_ULT_COST)
             },
             "echo": {
@@ -112,15 +112,15 @@ settings {
                 "ultGen%": percent(OW2_HANZO_ULT_COST/OW1_HANZO_ULT_COST)
             },
             "illari": {
-                "health%": percent(OW1_ILLARI_PYLON_HP/OW2_ILLARI_PYLON_HP), # for pylon hp
+                "health%": percent(OW1_ILLARI_HEALING_PYLON_HP/OW2_ILLARI_HEALING_PYLON_HP), # for pylon hp
                 "ability1Cooldown%": percent(OW1_ILLARI_OUTBURST_COOLDOWN/OW2_ILLARI_OUTBURST_COOLDOWN),
-                "ability2Cooldown%": percent(OW1_ILLARI_PYLON_COOLDOWN/OW2_ILLARI_PYLON_COOLDOWN),
+                "ability2Cooldown%": percent(OW1_ILLARI_HEALING_PYLON_COOLDOWN/OW2_ILLARI_HEALING_PYLON_COOLDOWN),
                 "ultGen%": percent(OW2_ILLARI_ULT_COST/OW1_ILLARI_ULT_COST)
             },
             "junkerQueen": {
                 "health%": percent(OW1_JUNKERQUEEN_SHOUT_OVERHEALTH/OW2_JUNKERQUEEN_SHOUT_OVERHEALTH), # for shout overhealth
                 "secondaryFireCooldown%": percent(OW1_JUNKERQUEEN_BLADE_COOLDOWN/OW2_JUNKERQUEEN_BLADE_COOLDOWN),
-                "ability1Cooldown%": percent(OW1_JUNKERQUEEN_SHOUT_COOLDOWN_TIME/OW2_JUNKERQUEEN_SHOUT_COOLDOWN_TIME),
+                "ability1Cooldown%": percent(OW1_JUNKERQUEEN_SHOUT_COOLDOWN/OW2_JUNKERQUEEN_SHOUT_COOLDOWN),
                 "ultGen%": percent(OW2_JUNKERQUEEN_ULT_COST/OW1_JUNKERQUEEN_ULT_COST)
             },
             "junkrat": {
@@ -178,13 +178,13 @@ settings {
             "reinhardt": {
                 "secondaryFireRechargeRate%": percent(OW1_REINHARDT_BARRIER_REGEN/OW2_REINHARDT_BARRIER_REGEN),
                 "health%": percent(OW1_REINHARDT_BARRIER_HEALTH/OW2_REINHARDT_BARRIER_HEALTH), # for barrier
-                "ability1Cooldown%": percent(OW1_REINHARDT_CHARGE_COOLDOWN_TIME/OW2_REINHARDT_CHARGE_COOLDOWN_TIME),
+                "ability1Cooldown%": percent(OW1_REINHARDT_CHARGE_COOLDOWN/OW2_REINHARDT_CHARGE_COOLDOWN),
                 "ultGen%": percent(OW2_REINHARDT_ULT_COST/OW1_REINHARDT_ULT_COST)
             },
             "roadhog": {
                 "secondaryFireMaximumTime%": percent((OW1_ROADHOG_BREATHER_CAST_TIME+OW1_ROADHOG_BREATHER_DURATION)/OW2_ROADHOG_BREATHER_DURATION),
                 "secondaryFireRechargeRate%": 500,
-                "ability1Cooldown%": percent(OW1_ROADHOG_HOOK_COOLDOWN_TIME/OW2_ROADHOG_HOOK_COOLDOWN_TIME),
+                "ability1Cooldown%": percent(OW1_ROADHOG_HOOK_COOLDOWN/OW2_ROADHOG_HOOK_COOLDOWN),
                 "ability2Cooldown%": percent(OW1_ROADHOG_BREATHER_COOLDOWN/OW2_ROADHOG_TRAP_COOLDOWN),
                 "ultGen%": percent(OW2_ROADHOG_ULT_COST/OW1_ROADHOG_ULT_COST)
             },
@@ -202,7 +202,7 @@ settings {
             },
             "sombra": {
                 "health%": percent(OW1_SOMBRA_HEALTH/OW2_SOMBRA_HEALTH),
-                "secondaryFireCooldown%": percent(OW1_SOMBRA_HACK_COOLDOWN_TIME/OW2_SOMBRA_HACK_COOLDOWN_TIME),
+                "secondaryFireCooldown%": percent(OW1_SOMBRA_HACK_COOLDOWN/OW2_SOMBRA_HACK_COOLDOWN),
                 "ultGen%": percent(OW2_SOMBRA_ULT_COST/OW1_SOMBRA_ULT_COST)
             },
             "symmetra": {
@@ -226,12 +226,12 @@ settings {
             },
             "winston": {
                 "health%": percent(OW1_WINSTON_BARRIER_HEALTH/OW2_WINSTON_BARRIER_HEALTH), # for barrier hp
-                "ability1Cooldown%": percent(OW1_WINSTON_JUMP_PACK_COOLDOWN_TIME/OW2_WINSTON_JUMP_PACK_COOLDOWN_TIME),
+                "ability1Cooldown%": percent(OW1_WINSTON_JUMP_PACK_COOLDOWN/OW2_WINSTON_JUMP_PACK_COOLDOWN),
                 "ultGen%": percent(OW2_WINSTON_ULT_COST/OW1_WINSTON_ULT_COST)
             },
             "hammond": {
                 "ability1Kb%": percent(1/OW2_WRECKING_BALL_FIREBALL_KB),
-                "ability3Cooldown%": percent(OW1_WRECKING_BALL_PILEDRIVER_COOLDOWN_TIME/OW2_WRECKING_BALL_PILEDRIVER_COOLDOWN_TIME),
+                "ability3Cooldown%": percent(OW1_WRECKING_BALL_PILEDRIVER_COOLDOWN/OW2_WRECKING_BALL_PILEDRIVER_COOLDOWN),
                 "ultGen%": percent(OW2_WRECKING_BALL_ULT_COST/OW1_WRECKING_BALL_ULT_COST),
             },
             "zarya": {

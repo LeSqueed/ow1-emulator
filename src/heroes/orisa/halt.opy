@@ -40,7 +40,7 @@ rule "[orisa/halt.opy]: Trigger Halt ability":
                            or (eventPlayer.halt_position == eventPlayer.halt_ending_position)), Math.INFINITY) # Detect halt pull activation on right click
     explodeHalt()
 
-    eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE, OW1_ORISA_HALT_COOLDOWN_TIME)
+    eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE, OW1_ORISA_HALT_COOLDOWN)
 
 
 def shootHalt():

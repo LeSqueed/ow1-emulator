@@ -260,11 +260,11 @@ rule "[doomfist/slam.opy]: Find slammed victims":
     and (distance(attacker, victim) <= OW1_DOOMFIST_SLAM_AOE_MAX_RADIUS) \
     and true): # [TODO]: add condition to check victim in 60 degree cone
         attacker.ow1_slam_victims.append(victim)
-        damage(attacker, null, OW2_DOOMFIST_BEST_DEFENSE*eventPlayer._hp_scalar - OW1_DOOMFIST_BEST_DEFENSE)
+        damage(attacker, null, OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar - OW1_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH)
     else: # Handle OW2 slam victims
         # Transfer shield gained from uppercut to shield gained from OW2 slam victims
-        damage(attacker, null, OW2_DOOMFIST_BEST_DEFENSE*eventPlayer._hp_scalar - min(OW2_DOOMFIST_BEST_DEFENSE*eventPlayer._hp_scalar, attacker.uppercut_shields))
-        attacker.uppercut_shields -= min(OW2_DOOMFIST_BEST_DEFENSE*eventPlayer._hp_scalar, attacker.uppercut_shields)
+        damage(attacker, null, OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar - min(OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar, attacker.uppercut_shields))
+        attacker.uppercut_shields -= min(OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar, attacker.uppercut_shields)
 
 
 rule "[doomfist/slam.opy]: Slammed victims damage + bounce effect":
@@ -284,37 +284,37 @@ rule "[doomfist/slam.opy]: Slammed victims damage + bounce effect":
 def createSlamIndicatorGui():
     @Name "[doomfist/slam.opy]: createSlamIndicatorGui()"
 
-    for slam_i in range(OW1_DOOM_SLAM_INDIC_BEAM_COUNT):
+    for slam_i in range(OW1_DOOMFIST_SLAM_INDIC_BEAM_COUNT):
         if eventPlayer.slam_indicator_beam_id[slam_i] == null:
             createBeam(eventPlayer if isIndicatorVisible() else null,
                        Beam.GOOD, 
                        updateEveryTick(eventPlayer.indicator_slam_position + \
                                        OW1_DOOMFIST_SLAM_AOE_MIN_RADIUS * \
-                                       worldVector(cosDeg(OW1_DOOMFIST_SLAM_FAN_ANGLE/2-evalOnce(slam_i)*OW1_DOOMFIST_SLAM_FAN_ANGLE/(OW1_DOOM_SLAM_INDIC_BEAM_COUNT-1))*Vector.FORWARD + \
-                                                   sinDeg(OW1_DOOMFIST_SLAM_FAN_ANGLE/2-evalOnce(slam_i)*OW1_DOOMFIST_SLAM_FAN_ANGLE/(OW1_DOOM_SLAM_INDIC_BEAM_COUNT-1))*Vector.LEFT, \
+                                       worldVector(cosDeg(OW1_DOOMFIST_SLAM_FAN_ANGLE/2-evalOnce(slam_i)*OW1_DOOMFIST_SLAM_FAN_ANGLE/(OW1_DOOMFIST_SLAM_INDIC_BEAM_COUNT-1))*Vector.FORWARD + \
+                                                   sinDeg(OW1_DOOMFIST_SLAM_FAN_ANGLE/2-evalOnce(slam_i)*OW1_DOOMFIST_SLAM_FAN_ANGLE/(OW1_DOOMFIST_SLAM_INDIC_BEAM_COUNT-1))*Vector.LEFT, \
                                                    eventPlayer, \
                                                    Transform.ROTATION)), 
                        updateEveryTick(eventPlayer.indicator_slam_position + \
                                        OW1_DOOMFIST_SLAM_AOE_MAX_RADIUS * \
-                                       worldVector(cosDeg(OW1_DOOMFIST_SLAM_FAN_ANGLE/2-evalOnce(slam_i)*OW1_DOOMFIST_SLAM_FAN_ANGLE/(OW1_DOOM_SLAM_INDIC_BEAM_COUNT-1))*Vector.FORWARD + \
-                                                   sinDeg(OW1_DOOMFIST_SLAM_FAN_ANGLE/2-evalOnce(slam_i)*OW1_DOOMFIST_SLAM_FAN_ANGLE/(OW1_DOOM_SLAM_INDIC_BEAM_COUNT-1))*Vector.LEFT, \
+                                       worldVector(cosDeg(OW1_DOOMFIST_SLAM_FAN_ANGLE/2-evalOnce(slam_i)*OW1_DOOMFIST_SLAM_FAN_ANGLE/(OW1_DOOMFIST_SLAM_INDIC_BEAM_COUNT-1))*Vector.FORWARD + \
+                                                   sinDeg(OW1_DOOMFIST_SLAM_FAN_ANGLE/2-evalOnce(slam_i)*OW1_DOOMFIST_SLAM_FAN_ANGLE/(OW1_DOOMFIST_SLAM_INDIC_BEAM_COUNT-1))*Vector.LEFT, \
                                                    eventPlayer, \
                                                    Transform.ROTATION)), 
                        Color.BLUE, 
                        EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
             eventPlayer.slam_indicator_beam_id[slam_i] = getLastCreatedEntity()
 
-    for slam_i in range(OW1_DOOM_SLAM_INDIC_RING_COUNT):
+    for slam_i in range(OW1_DOOMFIST_SLAM_INDIC_RING_COUNT):
         if eventPlayer.slam_indicator_ring_id[slam_i] == null:
             createEffect(eventPlayer if isIndicatorVisible() else null, 
                          Effect.RING, 
                          Color.BLUE, 
                          updateEveryTick(eventPlayer.indicator_slam_position + \
-                                         evalOnce(slam_i+1)*(OW1_DOOMFIST_SLAM_AOE_MAX_RADIUS)/OW1_DOOM_SLAM_INDIC_RING_COUNT * \
+                                         evalOnce(slam_i+1)*(OW1_DOOMFIST_SLAM_AOE_MAX_RADIUS)/OW1_DOOMFIST_SLAM_INDIC_RING_COUNT * \
                                          worldVector(Vector.FORWARD, 
                                                      eventPlayer, 
                                                      Transform.ROTATION)), 
-                         (evalOnce(slam_i+1)*(OW1_DOOMFIST_SLAM_AOE_MAX_RADIUS)/OW1_DOOM_SLAM_INDIC_RING_COUNT)*sinDeg(OW1_DOOMFIST_SLAM_FAN_ANGLE/2), 
+                         (evalOnce(slam_i+1)*(OW1_DOOMFIST_SLAM_AOE_MAX_RADIUS)/OW1_DOOMFIST_SLAM_INDIC_RING_COUNT)*sinDeg(OW1_DOOMFIST_SLAM_FAN_ANGLE/2), 
                          EffectReeval.VISIBILITY_POSITION_AND_RADIUS)
             eventPlayer.slam_indicator_ring_id[slam_i] = getLastCreatedEntity()
     

@@ -1,0 +1,538 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* =========================================================================
+   PAGE BACKGROUND — hex grid texture + warm radial vignette
+   ========================================================================= */
+
+.ant-layout-content,
+.ant-layout > div {
+  position: relative;
+}
+
+/* Main content area — hex pattern + top glow */
+[data-theme='dark'] .ow-main-content {
+  background-color: #0e0e12;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% 0%, rgba(249, 158, 26, 0.06) 0%, transparent 70%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='49' viewBox='0 0 28 49'%3E%3Cg fill='%23f99e1a' fill-opacity='0.04' fill-rule='evenodd'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.3h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/svg%3E");
+  min-height: 100vh;
+}
+
+/* Sidebar — denser hex grid + stronger top gradient */
+[data-theme='dark'] .ow-sidebar {
+  background-image:
+    linear-gradient(180deg, rgba(249, 158, 26, 0.07) 0%, transparent 30%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='35' viewBox='0 0 28 49'%3E%3Cg fill='%23f99e1a' fill-opacity='0.06' fill-rule='evenodd'%3E%3Cpath d='M13.99 9.25l13 7.5v15l-13 7.5L1 31.75v-15l12.99-7.5zM3 17.9v12.7l10.99 6.34 11-6.35V17.9l-11-6.34L3 17.9zM0 15l12.98-7.5V0h-2v6.35L0 12.69v2.3zm0 18.5L12.98 41v8h-2v-6.85L0 35.81v-2.3zM15 0v7.5L27.99 15H28v-2.31h-.01L17 6.35V0h-2zm0 49v-8l12.99-7.5H28v2.3h-.01L17 42.15V49h-2z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* =========================================================================
+   PAGE LOAD ANIMATION
+   ========================================================================= */
+
+/* Page content — quick opacity only; the ScrambleTitle is the dramatic effect */
+@keyframes ow-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Letter shuffle animation for individual characters */
+@keyframes ow-letter-shuffle {
+  0% {
+    opacity: 0;
+    transform: translateX(-5px) scale(0.9);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(0) scale(1.03);
+  }
+  40% {
+    transform: translateX(0) scale(1.05);
+  }
+  60% {
+    transform: translateX(0) scale(1.02);
+  }
+  80% {
+    transform: translateX(0) scale(1.01);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+/* Generic fade-up for action buttons etc. */
+@keyframes ow-fade-up {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* PageHeader section label — fast slide from left */
+@keyframes ow-header-label {
+  from { opacity: 0; transform: translateX(-10px); }
+  to   { opacity: 0.85; transform: translateX(0); }
+}
+
+/* PageHeader title — deeper slide + blur wipe */
+@keyframes ow-header-title {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+    filter: blur(0);
+  }
+}
+
+/* PageHeader title — letter shuffle effect */
+@keyframes ow-header-title-shuffle {
+  0% { 
+    opacity: 0;
+    transform: translateX(-24px) scale(0.95);
+    filter: blur(8px);
+  }
+  20% { 
+    opacity: 1;
+    transform: translateX(0) scale(1.02);
+    filter: blur(0);
+  }
+  60% { 
+    transform: translateX(0) scale(1.03);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Orange accent bar — grows from zero width */
+@keyframes ow-accent-grow {
+  from { width: 0; opacity: 0; }
+  to   { width: 48px; opacity: 1; }
+}
+
+/* Staggered card/row reveal */
+@keyframes ow-reveal {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ow-page {
+  animation: ow-fade-in 0.15s ease both;
+}
+
+/* =========================================================================
+   CARDS — gradient depth + top-edge accent + scan shimmer
+   ========================================================================= */
+
+.ant-card {
+  border-radius: 4px !important;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme='dark'] .ant-card {
+  background: linear-gradient(160deg, #1c1c28 0%, #15151e 60%) !important;
+  border: 1px solid #2c2c40 !important;
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.6),
+    0 1px 0 rgba(255, 255, 255, 0.03) inset !important;
+}
+
+/* Orange top-edge accent */
+[data-theme='dark'] .ant-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #f99e1a 0%, rgba(249, 158, 26, 0.3) 50%, transparent 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hover lift */
+[data-theme='dark'] .ant-card:hover {
+  border-color: #3c3c55 !important;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(249, 158, 26, 0.08) !important;
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+[data-theme='dark'] .ant-card-head {
+  background: transparent !important;
+  border-bottom: 1px solid #2c2c40 !important;
+}
+
+/* =========================================================================
+   TABLES — full overhaul
+   ========================================================================= */
+
+/* Wrapper — give it a border so it feels contained */
+[data-theme='dark'] .ant-table-wrapper {
+  border: 1px solid #2c2c40;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.ant-table {
+  border-radius: 0 !important;
+  overflow: hidden;
+}
+
+/* Header — gradient + stronger bottom border */
+.ant-table-thead > tr > th {
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.4px !important;
+  white-space: nowrap !important;
+}
+
+[data-theme='dark'] .ant-table-thead > tr > th {
+  background: linear-gradient(180deg, #232335 0%, #1c1c28 100%) !important;
+  border-bottom: 2px solid rgba(249, 158, 26, 0.25) !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.04) !important;
+  color: #8a8070 !important;
+}
+
+/* Last header cell — no right border */
+[data-theme='dark'] .ant-table-thead > tr > th:last-child {
+  border-right: none !important;
+}
+
+/* Body rows */
+.ant-table-tbody > tr > td {
+  padding: 11px 16px !important;
+  transition: background 0.12s ease, border-color 0.12s ease, padding 0.12s ease !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03) !important;
+}
+
+/* Zebra striping — extremely subtle */
+[data-theme='dark'] .ant-table-tbody > tr:nth-child(even) > td {
+  background: rgba(255, 255, 255, 0.012) !important;
+}
+
+/* Row hover — orange gradient sweep from left */
+[data-theme='dark'] .ant-table-tbody > tr:hover > td {
+  background: linear-gradient(
+    90deg,
+    rgba(249, 158, 26, 0.09) 0%,
+    rgba(249, 158, 26, 0.03) 30%,
+    rgba(249, 158, 26, 0.01) 100%
+  ) !important;
+}
+
+/* First cell on hover gets the orange left border */
+[data-theme='dark'] .ant-table-tbody > tr:hover > td:first-child {
+  border-left: 2px solid #f99e1a !important;
+  padding-left: 14px !important;
+}
+
+/* Expand rows, footer, summary */
+[data-theme='dark'] .ant-table-footer,
+[data-theme='dark'] .ant-table-summary {
+  background: #1c1c28 !important;
+  border-top: 1px solid #2c2c40 !important;
+}
+
+/* =========================================================================
+   SCROLLBAR — narrow amber
+   ========================================================================= */
+
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+
+::-webkit-scrollbar-track { background: transparent; }
+
+::-webkit-scrollbar-thumb {
+  background: rgba(249, 158, 26, 0.2);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 158, 26, 0.45);
+}
+
+/* =========================================================================
+   CODE CHIPS
+   ========================================================================= */
+
+code {
+  font-family: 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 12px;
+  border-radius: 3px;
+  padding: 2px 7px;
+}
+
+[data-theme='dark'] code {
+  background: #1c1810 !important;
+  color: #ffb340 !important;
+  border: 1px solid rgba(249, 158, 26, 0.2) !important;
+}
+
+[data-theme='light'] code {
+  background: #ffecd4 !important;
+  color: #8a4800 !important;
+  border: 1px solid #f0c88a !important;
+}
+
+/* =========================================================================
+   TAGS
+   ========================================================================= */
+
+.ant-tag {
+  border-radius: 3px !important;
+  font-weight: 600 !important;
+  font-size: 10px !important;
+  padding: 0 6px !important;
+  line-height: 18px !important;
+  letter-spacing: 0.4px !important;
+  text-transform: uppercase !important;
+}
+
+/* =========================================================================
+   BUTTONS
+   ========================================================================= */
+
+.ant-btn {
+  border-radius: 3px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.3px !important;
+  transition: all 0.15s ease !important;
+}
+
+.ant-btn-primary {
+  box-shadow: 0 2px 8px rgba(249, 158, 26, 0.35) !important;
+}
+
+.ant-btn-primary:hover {
+  box-shadow: 0 4px 16px rgba(249, 158, 26, 0.55) !important;
+  transform: translateY(-1px) !important;
+}
+
+.ant-btn-primary:active {
+  transform: translateY(0) !important;
+}
+
+/* =========================================================================
+   INPUTS — orange focus glow
+   ========================================================================= */
+
+.ant-input,
+.ant-input-number,
+.ant-select-selector,
+.ant-input-affix-wrapper {
+  border-radius: 3px !important;
+  transition: all 0.15s ease !important;
+}
+
+.ant-input:focus,
+.ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused,
+.ant-input-number-focused,
+.ant-select-focused .ant-select-selector {
+  border-color: #f99e1a !important;
+  box-shadow: 0 0 0 2px rgba(249, 158, 26, 0.15) !important;
+}
+
+.ant-input:hover,
+.ant-input-affix-wrapper:hover,
+.ant-input-number:hover,
+.ant-select-selector:hover {
+  border-color: rgba(249, 158, 26, 0.6) !important;
+}
+
+/* =========================================================================
+   MODALS — OW panel treatment
+   ========================================================================= */
+
+.ant-modal-content {
+  border-radius: 4px !important;
+  overflow: hidden !important;
+}
+
+[data-theme='dark'] .ant-modal-content {
+  background: linear-gradient(160deg, #1c1c28 0%, #15151e 100%) !important;
+  border: 1px solid #2c2c40 !important;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.85),
+    0 0 0 1px rgba(249, 158, 26, 0.06) !important;
+}
+
+[data-theme='dark'] .ant-modal-header {
+  background: transparent !important;
+  border-bottom: 1px solid #2c2c40 !important;
+  padding-left: 24px !important;
+  position: relative !important;
+}
+
+/* Orange left-edge on modal header */
+[data-theme='dark'] .ant-modal-header::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, #f99e1a 0%, rgba(249, 158, 26, 0.3) 100%);
+}
+
+[data-theme='dark'] .ant-modal-title {
+  font-weight: 700 !important;
+  letter-spacing: 0.3px !important;
+  font-size: 15px !important;
+}
+
+/* =========================================================================
+   SIDEBAR / MENU
+   ========================================================================= */
+
+[data-theme='dark'] .ant-menu-item {
+  margin: 2px 8px !important;
+  border-radius: 3px !important;
+  transition: all 0.15s ease !important;
+}
+
+[data-theme='dark'] .ant-menu-item:hover {
+  background: rgba(249, 158, 26, 0.07) !important;
+}
+
+[data-theme='dark'] .ant-menu-item-selected {
+  background: rgba(249, 158, 26, 0.12) !important;
+  border-left: 2px solid #f99e1a !important;
+}
+
+[data-theme='dark'] .ant-menu-item-selected .anticon,
+[data-theme='dark'] .ant-menu-item-selected span {
+  color: #f99e1a !important;
+}
+
+/* =========================================================================
+   SEGMENTED CONTROL
+   ========================================================================= */
+
+[data-theme='dark'] .ant-segmented {
+  border-radius: 3px !important;
+}
+
+[data-theme='dark'] .ant-segmented-item-selected {
+  background: rgba(249, 158, 26, 0.18) !important;
+  color: #f99e1a !important;
+  font-weight: 600 !important;
+}
+
+/* =========================================================================
+   PAGINATION
+   ========================================================================= */
+
+.ant-pagination-item-active {
+  border-color: #f99e1a !important;
+  border-radius: 3px !important;
+}
+
+[data-theme='dark'] .ant-pagination-item-active a {
+  color: #f99e1a !important;
+}
+
+/* =========================================================================
+   FORM LABELS — HUD-style small caps
+   ========================================================================= */
+
+.ant-form-item-label > label {
+  font-weight: 700 !important;
+  font-size: 10px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.8px !important;
+}
+
+/* =========================================================================
+   DIVIDERS
+   ========================================================================= */
+
+[data-theme='dark'] .ant-divider {
+  border-color: #2c2c40 !important;
+}
+
+[data-theme='dark'] .ant-divider-inner-text {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  color: #8a8070 !important;
+}
+
+/* =========================================================================
+   SELECT DROPDOWN
+   ========================================================================= */
+
+[data-theme='dark'] .ant-select-dropdown {
+  border: 1px solid #2c2c40 !important;
+  border-radius: 4px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7) !important;
+  background: #15151e !important;
+}
+
+[data-theme='dark'] .ant-select-item-option-selected {
+  background: rgba(249, 158, 26, 0.12) !important;
+  color: #f99e1a !important;
+}
+
+/* =========================================================================
+   STATISTIC — for dashboard panels
+   ========================================================================= */
+
+.ant-statistic-title {
+  font-size: 10px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+  margin-bottom: 4px !important;
+}
+
+.ant-statistic-content-value {
+  font-weight: 800 !important;
+  letter-spacing: -1px !important;
+  line-height: 1 !important;
+}
+
+/* =========================================================================
+   EMPTY STATE
+   ========================================================================= */
+
+.ant-empty-description {
+  opacity: 0.4;
+}
+
+/* =========================================================================
+   POPOVER / TOOLTIP
+   ========================================================================= */
+
+[data-theme='dark'] .ant-tooltip-inner {
+  background: #1c1c28 !important;
+  border: 1px solid #2c2c40 !important;
+  border-radius: 3px !important;
+  font-size: 12px !important;
+}
