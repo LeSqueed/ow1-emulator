@@ -1,8 +1,112 @@
 {
-  "hash": "1ea2fae0",
+  "hash": "93b5eeda",
   "configHash": "5ffcf9b5",
-  "lockfileHash": "e3b0c442",
-  "browserHash": "3ea16af2",
-  "optimized": {},
-  "chunks": {}
+  "lockfileHash": "63b03523",
+  "browserHash": "9204e078",
+  "optimized": {
+    "react/jsx-dev-runtime": {
+      "src": "../../node_modules/.pnpm/react@18.3.1/node_modules/react/jsx-dev-runtime.js",
+      "file": "react_jsx-dev-runtime.js",
+      "fileHash": "0ff530cf",
+      "needsInterop": true
+    },
+    "react-dom/client": {
+      "src": "../../node_modules/.pnpm/react-dom@18.3.1_react@18.3.1/node_modules/react-dom/client.js",
+      "file": "react-dom_client.js",
+      "fileHash": "3532cdbe",
+      "needsInterop": true
+    },
+    "react": {
+      "src": "../../node_modules/.pnpm/react@18.3.1/node_modules/react/index.js",
+      "file": "react.js",
+      "fileHash": "0630c9a8",
+      "needsInterop": true
+    },
+    "react-router-dom": {
+      "src": "../../node_modules/.pnpm/react-router-dom@6.30.3_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/react-router-dom/dist/index.js",
+      "file": "react-router-dom.js",
+      "fileHash": "a9063f76",
+      "needsInterop": false
+    },
+    "antd": {
+      "src": "../../node_modules/.pnpm/antd@5.29.3_date-fns@3.6.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/antd/es/index.js",
+      "file": "antd.js",
+      "fileHash": "1eb17161",
+      "needsInterop": false
+    },
+    "dayjs": {
+      "src": "../../node_modules/dayjs/dayjs.min.js",
+      "file": "dayjs.js",
+      "fileHash": "28cd50f7",
+      "needsInterop": true
+    },
+    "dayjs/plugin/weekday": {
+      "src": "../../node_modules/dayjs/plugin/weekday.js",
+      "file": "dayjs_plugin_weekday.js",
+      "fileHash": "fd77116c",
+      "needsInterop": true
+    },
+    "dayjs/plugin/localeData": {
+      "src": "../../node_modules/dayjs/plugin/localeData.js",
+      "file": "dayjs_plugin_localeData.js",
+      "fileHash": "fdcbba6d",
+      "needsInterop": true
+    },
+    "dayjs/plugin/weekOfYear": {
+      "src": "../../node_modules/dayjs/plugin/weekOfYear.js",
+      "file": "dayjs_plugin_weekOfYear.js",
+      "fileHash": "4d3f8093",
+      "needsInterop": true
+    },
+    "dayjs/plugin/weekYear": {
+      "src": "../../node_modules/dayjs/plugin/weekYear.js",
+      "file": "dayjs_plugin_weekYear.js",
+      "fileHash": "a8e391cb",
+      "needsInterop": true
+    },
+    "dayjs/plugin/advancedFormat": {
+      "src": "../../node_modules/dayjs/plugin/advancedFormat.js",
+      "file": "dayjs_plugin_advancedFormat.js",
+      "fileHash": "a4505ad9",
+      "needsInterop": true
+    },
+    "dayjs/plugin/customParseFormat": {
+      "src": "../../node_modules/dayjs/plugin/customParseFormat.js",
+      "file": "dayjs_plugin_customParseFormat.js",
+      "fileHash": "ae784d19",
+      "needsInterop": true
+    },
+    "@ant-design/icons": {
+      "src": "../../node_modules/.pnpm/@ant-design+icons@5.6.1_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/@ant-design/icons/es/index.js",
+      "file": "@ant-design_icons.js",
+      "fileHash": "ce980d4d",
+      "needsInterop": false
+    },
+    "antd/es/theme": {
+      "src": "../../node_modules/.pnpm/antd@5.29.3_date-fns@3.6.0_react-dom@18.3.1_react@18.3.1__react@18.3.1/node_modules/antd/es/theme/index.js",
+      "file": "antd_es_theme.js",
+      "fileHash": "3a2417f0",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "chunk-I3GLQJSJ": {
+      "file": "chunk-I3GLQJSJ.js"
+    },
+    "chunk-6A2GPUSF": {
+      "file": "chunk-6A2GPUSF.js"
+    },
+    "chunk-GK2CDZ75": {
+      "file": "chunk-GK2CDZ75.js"
+    },
+    "chunk-E3ZTUBEG": {
+      "file": "chunk-E3ZTUBEG.js"
+    },
+    "chunk-WQJA6ET6": {
+      "file": "chunk-WQJA6ET6.js"
+    },
+    "chunk-5WRI5ZAA": {
+      "file": "chunk-5WRI5ZAA.js"
+    }
+  }
 }

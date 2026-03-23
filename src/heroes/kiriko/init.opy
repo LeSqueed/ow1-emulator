@@ -13,7 +13,7 @@ def initKiriko():
 
     #removeSelfHealing()
 
-    eventPlayer.setHealingDealt(percent(OW1_KIRKIO_OFUDA_HEALING/OW2_KIRIKO_OFUDA_HEALING))
+    eventPlayer.setHealingDealt(percent(OW1_KIRIKO_HEALING_OFUDA_HEALING/OW2_KIRIKO_OFUDA_HEALING))
 
     eventPlayer.setMaxAmmo(0, 6)
     eventPlayer.setAmmo(0, 12)

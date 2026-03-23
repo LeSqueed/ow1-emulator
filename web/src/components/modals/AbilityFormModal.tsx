@@ -215,6 +215,7 @@ export const AbilityFormModal: React.FC<AbilityFormModalProps> = ({ open, heroId
               </Button>
             </div>
             <Table
+          showSorterTooltip={false}
               loading={loadingProperties}
               dataSource={properties}
               columns={propertyColumns}

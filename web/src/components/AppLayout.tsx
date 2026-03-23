@@ -8,9 +8,9 @@ import {
   HistoryOutlined,
   ExportOutlined,
 } from '@ant-design/icons';
-import { useApp } from '../contexts/AppContext.js';
-import { darkModeColors } from '../theme/config.js';
-import { PageHeader } from './PageHeader.js';
+import { useApp } from '../contexts/AppContext';
+import { darkModeColors } from '../theme/config';
+import { PageHeader } from './PageHeader';
 
 const { Sider } = Layout;
 

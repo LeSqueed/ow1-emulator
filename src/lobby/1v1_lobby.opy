@@ -112,25 +112,25 @@ settings {
                 "ultGen%": percent(OW2_HANZO_ULT_COST/OW1_HANZO_ULT_COST)
             },
             "illari": {
-                "health%": percent(OW1_ILLARI_HEALING_PYLON_HP/OW2_ILLARI_HEALING_PYLON_HP), # for pylon hp
+                "health%": percent(OW1_ILLARI_HEALING_PYLON_HEALTH/OW2_ILLARI_HEALING_PYLON_HEALTH), # for pylon hp
                 "ability1Cooldown%": percent(OW1_ILLARI_OUTBURST_COOLDOWN/OW2_ILLARI_OUTBURST_COOLDOWN),
                 "ability2Cooldown%": percent(OW1_ILLARI_HEALING_PYLON_COOLDOWN/OW2_ILLARI_HEALING_PYLON_COOLDOWN),
                 "ultGen%": percent(OW2_ILLARI_ULT_COST/OW1_ILLARI_ULT_COST)
             },
             "junkerQueen": {
-                "health%": percent(OW1_JUNKERQUEEN_SHOUT_OVERHEALTH/OW2_JUNKERQUEEN_SHOUT_OVERHEALTH), # for shout overhealth
-                "secondaryFireCooldown%": percent(OW1_JUNKERQUEEN_BLADE_COOLDOWN/OW2_JUNKERQUEEN_BLADE_COOLDOWN),
-                "ability1Cooldown%": percent(OW1_JUNKERQUEEN_SHOUT_COOLDOWN/OW2_JUNKERQUEEN_SHOUT_COOLDOWN),
-                "ultGen%": percent(OW2_JUNKERQUEEN_ULT_COST/OW1_JUNKERQUEEN_ULT_COST)
+                "health%": percent(OW1_JUNKER_QUEEN_COMMANDING_SHOUT_OVERHEALTH/OW2_JUNKER_QUEEN_COMMANDING_SHOUT_OVERHEALTH), # for shout overhealth
+                "secondaryFireCooldown%": percent(OW1_JUNKER_QUEEN_JAGGED_BLADE_COOLDOWN/OW2_JUNKER_QUEEN_JAGGED_BLADE_COOLDOWN),
+                "ability1Cooldown%": percent(OW1_JUNKER_QUEEN_COMMANDING_SHOUT_COOLDOWN/OW2_JUNKER_QUEEN_COMMANDING_SHOUT_COOLDOWN),
+                "ultGen%": percent(OW2_JUNKER_QUEEN_ULT_COST/OW1_JUNKER_QUEEN_ULT_COST)
             },
             "junkrat": {
-                "health%": percent((OW1_JUNKRAT_HEALTH-OW1_JUNKRAT_TIRE_HEALTH)/(OW2_JUNKRAT_HEALTH-OW2_JUNKRAT_TIRE_HEALTH)), # fore tire health
+                "health%": percent((OW1_JUNKRAT_HEALTH-OW1_JUNKRAT_RIP_TIRE_HEALTH)/(OW2_JUNKRAT_HEALTH-OW2_JUNKRAT_RIP_TIRE_HEALTH)), # fore tire health
                 "ability1Cooldown%": percent(OW1_JUNKRAT_CONCUSSION_MINE_COOLDOWN/OW2_JUNKRAT_CONCUSSION_MINE_COOLDOWN),
                 "ultGen%": percent(OW2_JUNKRAT_ULT_COST/OW1_JUNKRAT_ULT_COST)
             },
             "kiriko": {
                 "ability1Cooldown%": percent(OW1_KIRIKO_SWIFT_STEP_COOLDOWN/OW2_KIRIKO_SWIFT_STEP_COOLDOWN),
-                "ability2Cooldown%": percent(OW1_KIRIKO_SUZU_COOLDOWN/OW2_KIRIKO_SUZU_COOLDOWN),
+                "ability2Cooldown%": percent(OW1_KIRIKO_PROTECTION_SUZU_COOLDOWN/OW2_KIRIKO_PROTECTION_SUZU_COOLDOWN),
                 "ultGen%": percent(OW2_KIRIKO_ULT_COST/OW1_KIRIKO_ULT_COST)
             },
             "lifeweaver": {
@@ -241,48 +241,7 @@ settings {
             "zenyatta": {
                 "ultGen%": percent(OW2_ZENYATTA_ULT_COST/OW1_ZENYATTA_ULT_COST)
             },
-            "enabledHeroes": [
-                "ana",
-                "ashe",
-                "baptiste",
-                # "bastion",
-                # "brigitte",
-                "cassidy",
-                "doomfist",
-                # "dva",
-                "echo",
-                "genji",
-                "hanzo",
-                "illari",
-                # "junkerQueen",
-                # "junkrat",
-                "kiriko",
-                # "lifeweaver",
-                # "lucio",
-                # "mauga",
-                # "mei",
-                # "mercy",
-                # "moira",
-                # "orisa",
-                # "pharah",
-                # "ramattra",
-                # "reaper",
-                # "reinhardt",
-                # "roadhog",
-                # "sigma",
-                "sojourn",
-                "soldier",
-                # "sombra",
-                # "symmetra",
-                # "torbjorn",
-                "tracer",
-                # "venture",
-                "widowmaker",
-                # "winston",
-                # "hammond",
-                # "zarya",
-                "zenyatta",
-            ]
+            "enabledHeroes": ENABLED_HEROES
         }
     },
     "workshop": {

@@ -248,6 +248,7 @@ export const HeroFormModal: React.FC<HeroFormModalProps> = ({ open, editing, onC
             </Button>
           </div>
           <Table
+          showSorterTooltip={false}
             dataSource={heroAbilities}
             rowKey="id"
             size="small"

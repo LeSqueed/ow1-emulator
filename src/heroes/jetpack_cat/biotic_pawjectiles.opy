@@ -8,4 +8,4 @@ rule "[jetpack_cat/biotic_pawjectiles.opy]: Scale primary fire damage":
     @Condition eventAbility != Button.ABILITY_2
     @Condition eventAbility != Button.ULTIMATE
 
-    heal(victim, null, eventDamage - eventDamage * (OW1_JETPACK_CAT_PRIMARY_CENTER_DAMAGE/OW2_JETPACK_CAT_PRIMARY_CENTER_DAMAGE))
+    heal(victim, null, eventDamage - eventDamage * (OW1_JETPACK_CAT_BIOTIC_PAWJECTILES_DAMAGE/OW2_JETPACK_CAT_BIOTIC_PAWJECTILES_DAMAGE))

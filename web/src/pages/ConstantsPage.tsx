@@ -3,8 +3,8 @@ import { Button, Input, Table, Space, Card, Popconfirm, Tag, Tooltip } from 'ant
 import type { ColumnsType } from 'antd/es/table';
 import type { Constant } from '@/types';
 import { PlusOutlined, SearchOutlined, EditOutlined, DeleteOutlined, LinkOutlined, ToolOutlined, EyeOutlined, EyeInvisibleOutlined } from '@ant-design/icons';
-import { useApp } from '@/contexts/AppContext.js';
-import { darkModeColors as defaultDarkModeColors } from '@/theme/config.js';
+import { useApp } from '@/contexts/AppContext';
+import { darkModeColors as defaultDarkModeColors } from '@/theme/config';
 import { ConstantFormModal } from '@/components/modals/ConstantFormModal';
 
 export const ConstantsPage: React.FC = () => {
@@ -126,6 +126,7 @@ export const ConstantsPage: React.FC = () => {
           </Button>
         </div>
         <Table
+          showSorterTooltip={false}
           loading={loading}
           dataSource={filteredConstants}
           columns={columns}

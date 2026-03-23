@@ -3,9 +3,9 @@ import { Button, Input, Table, Space, Tag, Card, message, Popconfirm, Tooltip } 
 import { PlusOutlined, SearchOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
 import type { Hero } from '@/types';
-import { useApp } from '@/contexts/AppContext.js';
+import { useApp } from '@/contexts/AppContext';
 import { HeroFormModal } from '../components/modals/HeroFormModal';
-import { darkModeColors as defaultDarkModeColors, getRoleColor, getHealthTypeColor } from '@/theme/config.js';
+import { darkModeColors as defaultDarkModeColors, getRoleColor, getHealthTypeColor } from '@/theme/config';
 
 /** Convert snake_case constant_name to camelCase OverPy hero identifier. */
 function toOpyName(constantName: string): string {
@@ -162,6 +162,7 @@ export const HeroesPage: React.FC = () => {
           </Button>
         </div>
         <Table
+          showSorterTooltip={false}
           loading={loading}
           dataSource={filteredHeroes}
           columns={columns}

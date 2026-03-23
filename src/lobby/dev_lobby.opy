@@ -149,9 +149,9 @@ settings {
                 "ability1Cooldown%": percent(OW1_JETPACK_CAT_LIFELINE_COOLDOWN/OW2_JETPACK_CAT_LIFELINE_COOLDOWN)
             },
             #"junkerQueen": {
-            #    "secondaryFireCooldown%": percent(OW1_JUNKERQUEEN_BLADE_COOLDOWN/OW2_JUNKERQUEEN_BLADE_COOLDOWN),
-            #    "ability1Cooldown%": percent(OW1_JUNKERQUEEN_SHOUT_COOLDOWN/OW2_JUNKERQUEEN_SHOUT_COOLDOWN),
-            #    "ultGen%": percent(OW2_JUNKERQUEEN_ULT_COST/OW1_JUNKERQUEEN_ULT_COST)
+            #    "secondaryFireCooldown%": percent(OW1_JUNKER_QUEEN_JAGGED_BLADE_COOLDOWN/OW2_JUNKER_QUEEN_JAGGED_BLADE_COOLDOWN),
+            #    "ability1Cooldown%": percent(OW1_JUNKER_QUEEN_COMMANDING_SHOUT_COOLDOWN/OW2_JUNKER_QUEEN_COMMANDING_SHOUT_COOLDOWN),
+            #    "ultGen%": percent(OW2_JUNKER_QUEEN_ULT_COST/OW1_JUNKER_QUEEN_ULT_COST)
             #},
             "junkrat": {
                 "ability1Cooldown%": percent(OW1_JUNKRAT_CONCUSSION_MINE_COOLDOWN/OW2_JUNKRAT_CONCUSSION_MINE_COOLDOWN),
@@ -162,7 +162,7 @@ settings {
             },
             "kiriko": {
                 "ability1Cooldown%": percent(OW1_KIRIKO_SWIFT_STEP_COOLDOWN/OW2_KIRIKO_SWIFT_STEP_COOLDOWN),
-                "ability2Cooldown%": percent(OW1_KIRIKO_SUZU_COOLDOWN/OW2_KIRIKO_SUZU_COOLDOWN),
+                "ability2Cooldown%": percent(OW1_KIRIKO_PROTECTION_SUZU_COOLDOWN/OW2_KIRIKO_PROTECTION_SUZU_COOLDOWN),
                 "ultGen%": percent(OW2_KIRIKO_ULT_COST/OW1_KIRIKO_ULT_COST)
             },
             "lifeweaver": {

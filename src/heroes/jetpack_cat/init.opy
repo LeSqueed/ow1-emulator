@@ -10,7 +10,7 @@
 def initJetpackCat():
     @Name "[jetpack_cat/init.opy]: initJetpackCat()"
 
-    setCustomHp(OW1_JETPACK_CAT_HEALTH, 0, 0)
+    setCustomHp(OW1_JETPACK_CAT_HEALTH, OW1_JETPACK_CAT_SHIELDS, OW1_JETPACK_CAT_ARMOR)
     setUltCost(OW1_JETPACK_CAT_ULT_COST)
     eventPlayer.lifeline_duration = OW1_JETPACK_CAT_LIFELINE_MAX_DURATION
     showLifelineGui()

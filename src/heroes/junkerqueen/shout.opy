@@ -6,4 +6,4 @@
 #     @Condition eventPlayer.isUsingAbility1()
     
 #     waitUntil(not eventPlayer.isUsingAbility1(), Math.INFINITY)
-#     eventPlayer.setAbilityCooldown(Button.ABILITY_1, OW1_JUNKERQUEEN_SHOUT_COOLDOWN)
+#     eventPlayer.setAbilityCooldown(Button.ABILITY_1, OW1_JUNKER_QUEEN_COMMANDING_SHOUT_COOLDOWN)

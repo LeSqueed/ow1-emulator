@@ -104,6 +104,7 @@ export function ModalTable<T extends Record<string, any>>({
         ) : null}
 
         <Table
+          showSorterTooltip={false}
           dataSource={filteredData}
           columns={columns}
           rowKey={keyField}
@@ -154,6 +155,7 @@ export function TableModal<T extends Record<string, any>>({
       width={800}
     >
       <Table
+          showSorterTooltip={false}
         dataSource={data}
         columns={columns}
         rowKey={keyField}

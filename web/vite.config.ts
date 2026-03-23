@@ -7,19 +7,6 @@ export default defineConfig({
     react(),
     tsconfigPaths(),
   ],
-  resolve: {
-    alias: {
-      '@': '/src',
-      '@components': '/src/components',
-      '@pages': '/src/pages',
-      '@hooks': '/src/hooks',
-      '@services': '/src/services',
-      '@styles': '/src/styles',
-      '@types': '/src/types',
-      '@utils': '/src/utils',
-      '@assets': '/src/assets'
-    }
-  },
   server: {
     port: 3000,
     proxy: {

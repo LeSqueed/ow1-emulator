@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Row, Col, Card, Table, Space, Tag, Typography, Tooltip, DatePicker } from 'antd';
 import { ClockCircleOutlined } from '@ant-design/icons';
-import { useApp } from '@/contexts/AppContext.js';
-import { darkModeColors as defaultDarkModeColors } from '@/theme/config.js';
-import type { Revision } from '@/types';
+import { useApp } from '../contexts/AppContext';
+import { darkModeColors as defaultDarkModeColors } from '../theme/config';
+import type { Revision } from '../types';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
 import 'dayjs/plugin/weekday';
@@ -240,6 +240,7 @@ export const HistoryPage: React.FC = () => {
             }
           >
             <Table
+          showSorterTooltip={false}
               loading={contextLoading || loadingRevisions}
               dataSource={sortedRevisions}
               columns={columns}

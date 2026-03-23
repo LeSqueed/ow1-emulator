@@ -8,11 +8,11 @@ playervar jq_self_heal_id
 def initJunkerQueen():
     @Name "[junkerqueen/init.opy]: initJunkerQueen()"
     
-    setCustomHp(OW1_JUNKERQUEEN_HEALTH, OW1_JUNKERQUEEN_ARMOR, 0)
-    setBaseDamage(eventPlayer, OW1_JUNKERQUEEN_RAMPAGE_WOUND_DAMAGE/OW2_JUNKERQUEEN_RAMPAGE_WOUND_DAMAGE)
-    setUltCost(OW1_JUNKERQUEEN_ULT_COST)
+    setCustomHp(OW1_JUNKER_QUEEN_HEALTH, OW1_JUNKER_QUEEN_ARMOR, 0)
+    setBaseDamage(eventPlayer, OW1_JUNKER_QUEEN_RAMPAGE_WOUND_DAMAGE/OW2_JUNKER_QUEEN_RAMPAGE_WOUND_DAMAGE)
+    setUltCost(OW1_JUNKER_QUEEN_ULT_COST)
 
-    startHealingModification(eventPlayer, eventPlayer, percent(OW1_JUNKERQUEEN_ADRENALINE/OW2_JUNKERQUEEN_ADRENALINE), HealingReeval.NONE)
+    startHealingModification(eventPlayer, eventPlayer, percent(OW1_JUNKER_QUEEN_ADRENALINE_RUSH_HEALING/OW2_JUNKER_QUEEN_ADRENALINE_RUSH_HEALING), HealingReeval.NONE)
     eventPlayer.jq_self_heal_id = getLastHealingModification()
 
     # removeTankPassive()

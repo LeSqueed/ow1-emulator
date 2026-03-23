@@ -16,8 +16,8 @@ CURRENT = {
     'ow2': ROOT / 'src/constants/ow2_constants.opy',
 }
 GENERATED = {
-    'ow1': ROOT / 'constant-generator/generated_constants/ow1_constants.opy',
-    'ow2': ROOT / 'constant-generator/generated_constants/ow2_constants.opy',
+    'ow1': ROOT / 'src/constants/ow1_constants.generated.opy',
+    'ow2': ROOT / 'src/constants/ow2_constants.generated.opy',
 }
 OUTPUT = {
     'ow1': ROOT / 'missing_from_ow1_generated.txt',

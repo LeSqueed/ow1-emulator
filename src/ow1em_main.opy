@@ -4,6 +4,7 @@
 # Useful constants and macros
 #!include "constants/ow1_constants.opy"
 #!include "constants/ow2_constants.opy"
+#!include "constants/hero_roster.opy"
 #!include "utilities/macro_functions.opy"
 
 # Custom game lobby settings

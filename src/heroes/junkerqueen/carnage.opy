@@ -5,4 +5,4 @@ rule "[junkerqueen/carnage.opy]: OW1 carnage damage":
     @Hero junkerQueen
     @Condition eventAbility == Button.ABILITY_2
     
-    heal(victim, null, eventDamage - eventDamage/eventPlayer._base_damage_scalar*(OW1_JUNKERQUEEN_CARNAGE_DAMAGE/OW2_JUNKERQUEEN_CARNAGE_DAMAGE))
+    heal(victim, null, eventDamage - eventDamage/eventPlayer._base_damage_scalar*(OW1_JUNKER_QUEEN_CARNAGE_DAMAGE/OW2_JUNKER_QUEEN_CARNAGE_DAMAGE))

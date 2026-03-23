@@ -2,9 +2,9 @@ import React from 'react';
 import { Row, Col, Card, Table, Spin } from 'antd';
 import { CodeOutlined, UserOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import { useNavigate } from 'react-router-dom';
-import { useApp } from '@/contexts/AppContext.js';
+import { useApp } from '@/contexts/AppContext';
 import type { Constant, Revision } from '@/types';
-import { darkModeColors as defaultDarkModeColors } from '@/theme/config.js';
+import { darkModeColors as defaultDarkModeColors } from '@/theme/config';
 const colors = {
   text: defaultDarkModeColors.text,
   secondary: defaultDarkModeColors.secondary,
@@ -160,6 +160,7 @@ export const DashboardPage: React.FC = () => {
             }
           >
             <Table
+          showSorterTooltip={false}
               dataSource={constants.slice(0, 5)}
               columns={[
                 {
@@ -214,6 +215,7 @@ export const DashboardPage: React.FC = () => {
             }
           >
             <Table
+          showSorterTooltip={false}
               dataSource={revisions.slice(0, 5)}
               columns={[
                 {

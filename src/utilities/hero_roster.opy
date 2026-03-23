@@ -32,15 +32,10 @@ rule "[utilities/hero_roster.opy]: Custom role definition":
     _available_heroes = getAllPlayers().getAllowedHeroes()
 
     # Tanks
-    _tank_heroes = getTankHeroes()
-    _tank_heroes.remove(Hero.DOOMFIST)
-
-    # Damage
-    _damage_heroes = getDamageHeroes()
-    _damage_heroes.append(Hero.DOOMFIST)
-
-    # Supports
-    _support_heroes = getSupportHeroes()
+    # Role lists come from constants/hero_roster.opy (auto-generated from web UI)
+    _tank_heroes = OW1_TANK_HEROES
+    _damage_heroes = OW1_DPS_HEROES
+    _support_heroes = OW1_SUPPORT_HEROES
 
     _available_tanks = [h for h in _available_heroes if h in _tank_heroes]
     _available_dps = [h for h in _available_heroes if h in _damage_heroes]

@@ -1,15 +1,37 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const { spawnSync } = require('node:child_process');
 const overpy = require("./overpy/out/overpy_standalone.js");
 
 const args = process.argv.slice(2);
 const version = args[0];
 
 (async () => {
+  autoGenerateIfNeeded();
   await overpy.readyPromise;
   await generateWorkshop("ow1em_main.opy", "ow1em.txt");
   await generateWorkshop("dev_main.opy", "dev.txt");
 })();
+
+function autoGenerateIfNeeded() {
+  const dataPath = path.resolve(__dirname, 'constant-generator/data/constants.json');
+  const rosterPath = path.resolve(__dirname, 'src/constants/hero_roster.opy');
+
+  const dataMtime = fs.existsSync(dataPath) ? fs.statSync(dataPath).mtimeMs : 0;
+  const rosterMtime = fs.existsSync(rosterPath) ? fs.statSync(rosterPath).mtimeMs : 0;
+
+  if (dataMtime <= rosterMtime) return;
+
+  console.log('Data has changed since last build, regenerating constants...');
+  const result = spawnSync('node', ['generate.js'], {
+    cwd: path.resolve(__dirname, 'constant-generator'),
+    stdio: 'inherit',
+  });
+  if (result.status !== 0) {
+    console.error('Failed to generate constants, aborting build.');
+    process.exit(1);
+  }
+}
 
 // Expand #!include directives, resolving paths relative to each file's own directory.
 // This is needed because overpy resolves all includes from a single root path.

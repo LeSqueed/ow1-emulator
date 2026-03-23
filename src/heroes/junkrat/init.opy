@@ -10,8 +10,8 @@ def initJunkrat():
     setUltCost(OW1_JUNKRAT_ULT_COST)
     #removeSelfHealing()
 
-    setBaseDamage(eventPlayer, OW1_JUNKRAT_FRAG_DAMAGE/OW2_JUNKRAT_FRAG_DAMAGE)
-    eventPlayer.setProjectileSpeed(percent(OW1_JUNKRAT_PROJECTILE/OW2_JUNKRAT_PROJECTILE))
+    setBaseDamage(eventPlayer, OW1_JUNKRAT_FRAG_LAUNCHER_DAMAGE/OW2_JUNKRAT_FRAG_LAUNCHER_DAMAGE)
+    eventPlayer.setProjectileSpeed(percent(OW1_JUNKRAT_FRAG_LAUNCHER_PROJECTILE_SPEED/OW2_JUNKRAT_FRAG_LAUNCHER_PROJECTILE_SPEED))
 
 
 rule "[junkrat/init.opy]: Correct Mine, Tire damage":
