@@ -1753,7 +1753,7 @@
       "ability_id": 32,
       "name": "Decay rate",
       "live_value": 0,
-      "patched_value": 3,
+      "patched_value": 1,
       "value_type": "number",
       "enabled": true,
       "file": "ow1",
@@ -7432,6 +7432,15 @@
       "old_value": null,
       "new_value": "{\"ability_id\":79,\"name\":\"Swing speed\",\"live_value\":0,\"patched_value\":0.7,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":214}",
       "updated_at": "2026-09-30T11:37:25.741Z"
+    },
+    {
+      "id": 479,
+      "table_name": "ability_properties",
+      "record_id": 84,
+      "field_name": "patched_value",
+      "old_value": "3",
+      "new_value": "1",
+      "updated_at": "2026-09-30T11:44:57.384Z"
     }
   ]
 }

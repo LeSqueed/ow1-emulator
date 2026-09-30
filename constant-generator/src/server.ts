@@ -7,7 +7,7 @@ import { generateConstants } from './services/generator.js';
 import type { Revision } from './types/index.js';
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 4471;
 
 app.use(cors());
 app.use(express.json());

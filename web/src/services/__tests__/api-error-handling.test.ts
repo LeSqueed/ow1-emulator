@@ -18,7 +18,7 @@ describe('API Client - Error Handling Tests', () => {
       } as any);
 
       await expect(api.getConstants()).rejects.toThrow();
-      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:3001/api/constants');
+      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:4471/api/constants');
     });
 
     it('should throw error for 500 response', async () => {
@@ -32,7 +32,7 @@ describe('API Client - Error Handling Tests', () => {
       } as any);
 
       await expect(api.getHeroes()).rejects.toThrow();
-      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:3001/api/heroes');
+      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:4471/api/heroes');
     });
 
     it('should throw error for network errors', async () => {
@@ -40,11 +40,11 @@ describe('API Client - Error Handling Tests', () => {
       const fetchSpy = vi.spyOn(global, 'fetch').mockRejectedValueOnce(new Error('Network error'));
 
       await expect(api.getConstants()).rejects.toThrow('Network error');
-      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:3001/api/constants');
+      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:4471/api/constants');
     });
 
     it('should throw error for custom URL', async () => {
-      const customUrl = 'http://custom:3001/api';
+      const customUrl = 'http://custom:4471/api';
       const api = createApiInstance(customUrl);
       const fetchSpy = vi.spyOn(global, 'fetch').mockResolvedValueOnce({
         ok: false,
@@ -72,7 +72,7 @@ describe('API Client - Error Handling Tests', () => {
 
       await expect(api.createHero({ name: 'test' })).rejects.toThrow();
       expect(fetchSpy).toHaveBeenCalledWith(
-        'http://localhost:3001/api/heroes',
+        'http://localhost:4471/api/heroes',
         expect.objectContaining({
           method: 'POST'
         })
@@ -105,7 +105,7 @@ describe('API Client - Error Handling Tests', () => {
       } as any);
 
       await expect(api.updateHero('1', { name: 'updated' })).rejects.toThrow();
-      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:3001/api/heroes/1', expect.objectContaining({ method: 'PUT' }));
+      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:4471/api/heroes/1', expect.objectContaining({ method: 'PUT' }));
     });
 
     it('should throw error for 500 on update', async () => {
@@ -134,7 +134,7 @@ describe('API Client - Error Handling Tests', () => {
       } as any);
 
       await expect(api.deleteHero('1')).rejects.toThrow();
-      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:3001/api/heroes/1', expect.objectContaining({ method: 'DELETE' }));
+      expect(fetchSpy).toHaveBeenCalledWith('http://localhost:4471/api/heroes/1', expect.objectContaining({ method: 'DELETE' }));
     });
 
     it('should throw error for 500 on delete', async () => {

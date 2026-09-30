@@ -1,6 +1,6 @@
 import type { Hero, Ability, AbilityProperty, Constant, Revision } from '../types';
 
-const API_BASE = 'http://localhost:3001/api';
+const API_BASE = 'http://localhost:4471/api';
 
 const json = (res: Response) => res.json();
 
