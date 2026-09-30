@@ -64,6 +64,7 @@ async function generateWorkshop(mainFileName="main.opy", outputFileName="out.txt
     console.log(`Built ${outputFileName}`);
   } catch (err) {
     console.error(err);
+    process.exitCode = 1;
   }
 }
 

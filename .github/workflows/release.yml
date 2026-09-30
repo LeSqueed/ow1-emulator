@@ -1,81 +1,68 @@
 name: Release
+
 on:
   push:
-    branches:
-      - main
-      - beta
+    tags:
+      - 'v*'
+  workflow_dispatch:
 
 permissions:
-  contents: read # for checkout
+  contents: write
 
 jobs:
-  build:
-    name: Build
+  release:
+    name: Build and release
     runs-on: ubuntu-latest
-    container:
-      image: node
-    permissions:
-      contents: write # to be able to publish a GitHub release
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
-      id-token: write # to enable use of OIDC for npm provenance
     steps:
-      - name: install git
-        run: apt-get update && apt-get install -y --no-install-recommends git-core ca-certificates
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-          submodules: recursive
-      - name: install npm dependencies
+          submodules: true
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Determine version
         run: |
-             npm install -g semantic-release @semantic-release/gitlab
-             npm install semantic-release-discord-bot -D
-             cd "overpy/VS Code Extension/" && npm install && cd ../../
-      - name: build gamemode
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            echo "VERSION=${GITHUB_REF_NAME}" >> "$GITHUB_ENV"
+          else
+            echo "VERSION=dev-${GITHUB_SHA::7}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Build workshop code
         run: |
-             git config --global --add safe.directory '*'
-             export NEXT_VERSION=v$(semantic-release --dry-run | grep 'The next release version is' | sed -E 's/.* ([[:alnum:].\-]+)$/\1/')
-             node build.js $NEXT_VERSION
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          SEMANTIC_RELEASE_PACKAGE: ${{ github.event.repository.name }}
-      - name: Upload artifacts
+          # Use the committed generated constants instead of regenerating from the JSON
+          touch src/constants/hero_roster.opy
+          node build.js "$VERSION"
+          test -s build/ow1em.txt
+          mkdir -p release
+          cp build/ow1em.txt "release/ow1-emulator-${VERSION}.txt"
+
+      - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: build
-          path: build/
+          name: ow1-emulator-${{ env.VERSION }}
+          path: release/
 
-  release:
-    name: Release
-    needs: [Build]
-    runs-on: ubuntu-latest
-    container:
-      image: node
-    permissions:
-      contents: write # to be able to publish a GitHub release
-      issues: write # to be able to comment on released issues
-      pull-requests: write # to be able to comment on released pull requests
-      id-token: write # to enable use of OIDC for npm provenance
-    steps:
-      - name: install git
-        run: apt-get update && apt-get install -y --no-install-recommends git-core ca-certificates
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Download artifacts
-        uses: actions/download-artifact@master
-      - name: install npm dependencies
-        run: |
-             npm install -g semantic-release @semantic-release/gitlab
-             npm install semantic-release-discord-bot -D
-      - name: release gamemode
-        run: |
-             git config --global --add safe.directory '*'
-             semantic-release
+      - name: Create GitHub release
+        if: github.ref_type == 'tag'
         env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-          DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
-          SEMANTIC_RELEASE_PACKAGE: ${{ github.event.repository.name }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cat > notes.md <<'EOF'
+          ## How to import
+          1. Download `ow1-emulator-*.txt` below and open it in a text editor.
+          2. Select all and copy the contents.
+          3. In Overwatch: **Play → Custom Games → Create → Settings**.
+          4. Click the **Paste** (import settings) icon in the top right and confirm.
+          EOF
+          prerelease=""
+          case "$VERSION" in *-*) prerelease="--prerelease" ;; esac
+          gh release create "$VERSION" "release/ow1-emulator-${VERSION}.txt" \
+            --title "OW1 Emulator ${VERSION}" \
+            --notes-file notes.md \
+            --generate-notes \
+            $prerelease
