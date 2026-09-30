@@ -133,7 +133,7 @@
     {
       "display_name": "damage passive tank heal reduction percent",
       "constant_name": "DAMAGE_PASSIVE_TANK_HEAL_REDUCTION_PERCENT",
-      "live_value": 0,
+      "live_value": 30,
       "patched_value": 15,
       "remove_prefix": false,
       "enabled": true,
@@ -189,7 +189,7 @@
       "patched_armor": 0,
       "live_shields": 0,
       "patched_shields": 0,
-      "live_ult_cost": 2300,
+      "live_ult_cost": 2450,
       "patched_ult_cost": 2240,
       "id": 2
     },
@@ -225,9 +225,9 @@
       "display_name": "Brigitte",
       "constant_name": "brigitte",
       "role": "Support",
-      "live_health": 200,
+      "live_health": 175,
       "patched_health": 150,
-      "live_armor": 50,
+      "live_armor": 75,
       "patched_armor": 50,
       "live_shields": 0,
       "patched_shields": 0,
@@ -253,13 +253,13 @@
       "display_name": "Domina",
       "constant_name": "domina",
       "role": "Tank",
-      "live_health": 250,
+      "live_health": 100,
       "patched_health": 100,
       "live_armor": 0,
       "patched_armor": 0,
-      "live_shields": 400,
+      "live_shields": 375,
       "patched_shields": 250,
-      "live_ult_cost": 2350,
+      "live_ult_cost": 2200,
       "patched_ult_cost": 2000,
       "id": 7
     },
@@ -330,7 +330,7 @@
       "patched_armor": 0,
       "live_shields": 0,
       "patched_shields": 0,
-      "live_ult_cost": 2125,
+      "live_ult_cost": 2000,
       "patched_ult_cost": 1932,
       "id": 12
     },
@@ -352,7 +352,7 @@
       "display_name": "Hazard",
       "constant_name": "hazard",
       "role": "Tank",
-      "live_health": 425,
+      "live_health": 275,
       "patched_health": 250,
       "live_armor": 225,
       "patched_armor": 150,
@@ -391,7 +391,7 @@
       "patched_armor": 0,
       "live_shields": 0,
       "patched_shields": 25,
-      "live_ult_cost": 2400,
+      "live_ult_cost": 2575,
       "patched_ult_cost": 1950,
       "id": 16
     },
@@ -401,7 +401,7 @@
       "role": "Tank",
       "enabled": false,
       "opy_name": "junkerQueen",
-      "live_health": 525,
+      "live_health": 450,
       "patched_health": 400,
       "live_armor": 0,
       "patched_armor": 0,
@@ -423,7 +423,7 @@
       "patched_armor": 0,
       "live_shields": 0,
       "patched_shields": 0,
-      "live_ult_cost": 21000,
+      "live_ult_cost": 2100,
       "patched_ult_cost": 1925,
       "id": 18
     },
@@ -439,7 +439,7 @@
       "patched_armor": 0,
       "live_shields": 150,
       "patched_shields": 125,
-      "live_ult_cost": 3135,
+      "live_ult_cost": 2900,
       "patched_ult_cost": 3135,
       "id": 19
     },
@@ -934,7 +934,7 @@
     {
       "ability_id": 5,
       "name": "damage",
-      "live_value": 75,
+      "live_value": 90,
       "patched_value": 60,
       "value_type": "number",
       "enabled": true,
@@ -944,7 +944,7 @@
     {
       "ability_id": 5,
       "name": "healing",
-      "live_value": 75,
+      "live_value": 90,
       "patched_value": 100,
       "value_type": "number",
       "enabled": true,
@@ -994,7 +994,7 @@
     {
       "ability_id": 8,
       "name": "health",
-      "live_value": 125,
+      "live_value": 150,
       "patched_value": 150,
       "value_type": "number",
       "enabled": true,
@@ -1004,7 +1004,7 @@
     {
       "ability_id": 8,
       "name": "cooldown",
-      "live_value": 22,
+      "live_value": 20,
       "patched_value": 25,
       "value_type": "number",
       "enabled": true,
@@ -1044,7 +1044,7 @@
     {
       "ability_id": 10,
       "name": "cooldown",
-      "live_value": 14,
+      "live_value": 12,
       "patched_value": 15,
       "value_type": "number",
       "enabled": true,
@@ -1054,7 +1054,7 @@
     {
       "ability_id": 10,
       "name": "Ally HPS",
-      "live_value": "10",
+      "live_value": "(50/4)",
       "patched_value": "(75/4)",
       "value_type": "expression",
       "enabled": true,
@@ -1064,7 +1064,7 @@
     {
       "ability_id": 10,
       "name": "Self HPS",
-      "live_value": "10",
+      "live_value": "(50/4)",
       "patched_value": "(150/4)",
       "value_type": "expression",
       "enabled": true,
@@ -1264,7 +1264,7 @@
     {
       "ability_id": 15,
       "name": "Cooldown",
-      "live_value": 1,
+      "live_value": 12,
       "patched_value": 0,
       "value_type": "number",
       "enabled": true,
@@ -1284,7 +1284,7 @@
     {
       "ability_id": 17,
       "name": "health",
-      "live_value": 250,
+      "live_value": 300,
       "patched_value": 250,
       "value_type": "number",
       "enabled": true,
@@ -1374,7 +1374,7 @@
     {
       "ability_id": 22,
       "name": "Instant armor",
-      "live_value": 84,
+      "live_value": 100,
       "patched_value": 0,
       "value_type": "number",
       "enabled": true,
@@ -1394,7 +1394,7 @@
     {
       "ability_id": 22,
       "name": "Heal rate",
-      "live_value": 15,
+      "live_value": 30,
       "patched_value": 15,
       "value_type": "number",
       "enabled": true,
@@ -1664,7 +1664,7 @@
     {
       "ability_id": 30,
       "name": "Barrier health",
-      "live_value": 450,
+      "live_value": 500,
       "patched_value": 350,
       "value_type": "number",
       "enabled": true,
@@ -1714,7 +1714,7 @@
     {
       "ability_id": 32,
       "name": "Base overhealth",
-      "live_value": 40,
+      "live_value": 25,
       "patched_value": 30,
       "value_type": "number",
       "enabled": true,
@@ -2234,7 +2234,7 @@
     {
       "ability_id": 40,
       "name": "Cast time",
-      "live_value": 0.5,
+      "live_value": 1.2,
       "patched_value": 0,
       "value_type": "number",
       "enabled": true,
@@ -2254,7 +2254,7 @@
     {
       "ability_id": 41,
       "name": "Length",
-      "live_value": 7.016,
+      "live_value": 6,
       "patched_value": 0,
       "value_type": "number",
       "enabled": true,
@@ -2324,7 +2324,7 @@
     {
       "ability_id": 45,
       "name": "damage",
-      "live_value": 8,
+      "live_value": 7.5,
       "patched_value": 7,
       "value_type": "number",
       "enabled": true,
@@ -2344,7 +2344,7 @@
     {
       "ability_id": 46,
       "name": "Movement penalty",
-      "live_value": 0.4,
+      "live_value": 0.3,
       "patched_value": 0.4,
       "value_type": "number",
       "enabled": true,
@@ -2354,7 +2354,7 @@
     {
       "ability_id": 47,
       "name": "damage",
-      "live_value": 200,
+      "live_value": 175,
       "patched_value": 200,
       "value_type": "number",
       "enabled": true,
@@ -2424,7 +2424,7 @@
     {
       "ability_id": 51,
       "name": "Cooldown",
-      "live_value": 10,
+      "live_value": 8,
       "patched_value": 8,
       "value_type": "number",
       "enabled": true,
@@ -2524,7 +2524,7 @@
     {
       "ability_id": 57,
       "name": "Speed buff",
-      "live_value": 240.4,
+      "live_value": 230.1,
       "patched_value": 150,
       "value_type": "number",
       "enabled": true,
@@ -2554,7 +2554,7 @@
     {
       "ability_id": 58,
       "name": "Speed buff",
-      "live_value": 40,
+      "live_value": 30,
       "patched_value": 25,
       "value_type": "number",
       "enabled": true,
@@ -2644,7 +2644,7 @@
     {
       "ability_id": 63,
       "name": "Cooldown",
-      "live_value": 12,
+      "live_value": 13,
       "patched_value": 7,
       "value_type": "number",
       "enabled": true,
@@ -2764,7 +2764,7 @@
     {
       "ability_id": 69,
       "name": "Cooldown",
-      "live_value": 8,
+      "live_value": 7,
       "patched_value": 8,
       "value_type": "number",
       "enabled": true,
@@ -2854,7 +2854,7 @@
     {
       "ability_id": 74,
       "name": "Healing",
-      "live_value": 13,
+      "live_value": 12,
       "patched_value": 14,
       "value_type": "number",
       "enabled": true,
@@ -6600,6 +6600,339 @@
       "old_value": null,
       "new_value": "{\"ability_id\":76,\"name\":\"Healing\",\"live_value\":0,\"patched_value\":75,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":192}",
       "updated_at": "2026-03-23T15:24:23.217Z"
+    },
+    {
+      "id": 413,
+      "table_name": "heroes",
+      "record_id": 2,
+      "field_name": "live_ult_cost",
+      "old_value": "2300",
+      "new_value": "2450",
+      "updated_at": "2026-09-30T09:06:58.361Z"
+    },
+    {
+      "id": 414,
+      "table_name": "ability_properties",
+      "record_id": 10,
+      "field_name": "live_value",
+      "old_value": "125",
+      "new_value": "150",
+      "updated_at": "2026-09-30T09:06:58.361Z"
+    },
+    {
+      "id": 415,
+      "table_name": "ability_properties",
+      "record_id": 11,
+      "field_name": "live_value",
+      "old_value": "22",
+      "new_value": "20",
+      "updated_at": "2026-09-30T09:06:58.362Z"
+    },
+    {
+      "id": 416,
+      "table_name": "ability_properties",
+      "record_id": 15,
+      "field_name": "live_value",
+      "old_value": "14",
+      "new_value": "12",
+      "updated_at": "2026-09-30T09:06:58.362Z"
+    },
+    {
+      "id": 417,
+      "table_name": "ability_properties",
+      "record_id": 37,
+      "field_name": "live_value",
+      "old_value": "1",
+      "new_value": "12",
+      "updated_at": "2026-09-30T09:06:58.363Z"
+    },
+    {
+      "id": 418,
+      "table_name": "ability_properties",
+      "record_id": 127,
+      "field_name": "live_value",
+      "old_value": "0.5",
+      "new_value": "1.2",
+      "updated_at": "2026-09-30T09:06:58.364Z"
+    },
+    {
+      "id": 419,
+      "table_name": "ability_properties",
+      "record_id": 129,
+      "field_name": "live_value",
+      "old_value": "7.016",
+      "new_value": "6",
+      "updated_at": "2026-09-30T09:06:58.364Z"
+    },
+    {
+      "id": 420,
+      "table_name": "heroes",
+      "record_id": 5,
+      "field_name": "live_health",
+      "old_value": "200",
+      "new_value": "175",
+      "updated_at": "2026-09-30T09:06:58.365Z"
+    },
+    {
+      "id": 421,
+      "table_name": "heroes",
+      "record_id": 5,
+      "field_name": "live_armor",
+      "old_value": "50",
+      "new_value": "75",
+      "updated_at": "2026-09-30T09:06:58.365Z"
+    },
+    {
+      "id": 422,
+      "table_name": "ability_properties",
+      "record_id": 39,
+      "field_name": "live_value",
+      "old_value": "250",
+      "new_value": "300",
+      "updated_at": "2026-09-30T09:06:58.366Z"
+    },
+    {
+      "id": 423,
+      "table_name": "ability_properties",
+      "record_id": 48,
+      "field_name": "live_value",
+      "old_value": "84",
+      "new_value": "100",
+      "updated_at": "2026-09-30T09:06:58.367Z"
+    },
+    {
+      "id": 424,
+      "table_name": "ability_properties",
+      "record_id": 50,
+      "field_name": "live_value",
+      "old_value": "15",
+      "new_value": "30",
+      "updated_at": "2026-09-30T09:06:58.367Z"
+    },
+    {
+      "id": 425,
+      "table_name": "heroes",
+      "record_id": 7,
+      "field_name": "live_ult_cost",
+      "old_value": "2350",
+      "new_value": "2200",
+      "updated_at": "2026-09-30T09:06:58.367Z"
+    },
+    {
+      "id": 426,
+      "table_name": "ability_properties",
+      "record_id": 77,
+      "field_name": "live_value",
+      "old_value": "450",
+      "new_value": "500",
+      "updated_at": "2026-09-30T09:06:58.368Z"
+    },
+    {
+      "id": 427,
+      "table_name": "ability_properties",
+      "record_id": 136,
+      "field_name": "live_value",
+      "old_value": "8",
+      "new_value": "7.5",
+      "updated_at": "2026-09-30T09:06:58.368Z"
+    },
+    {
+      "id": 428,
+      "table_name": "ability_properties",
+      "record_id": 138,
+      "field_name": "live_value",
+      "old_value": "0.4",
+      "new_value": "0.3",
+      "updated_at": "2026-09-30T09:06:58.369Z"
+    },
+    {
+      "id": 429,
+      "table_name": "ability_properties",
+      "record_id": 139,
+      "field_name": "live_value",
+      "old_value": "200",
+      "new_value": "175",
+      "updated_at": "2026-09-30T09:06:58.369Z"
+    },
+    {
+      "id": 430,
+      "table_name": "ability_properties",
+      "record_id": 146,
+      "field_name": "live_value",
+      "old_value": "10",
+      "new_value": "8",
+      "updated_at": "2026-09-30T09:06:58.370Z"
+    },
+    {
+      "id": 431,
+      "table_name": "heroes",
+      "record_id": 16,
+      "field_name": "live_ult_cost",
+      "old_value": "2400",
+      "new_value": "2575",
+      "updated_at": "2026-09-30T09:06:58.370Z"
+    },
+    {
+      "id": 432,
+      "table_name": "ability_properties",
+      "record_id": 156,
+      "field_name": "live_value",
+      "old_value": "240.4",
+      "new_value": "230.1",
+      "updated_at": "2026-09-30T09:06:58.370Z"
+    },
+    {
+      "id": 433,
+      "table_name": "ability_properties",
+      "record_id": 159,
+      "field_name": "live_value",
+      "old_value": "40",
+      "new_value": "30",
+      "updated_at": "2026-09-30T09:06:58.371Z"
+    },
+    {
+      "id": 434,
+      "table_name": "heroes",
+      "record_id": 18,
+      "field_name": "live_ult_cost",
+      "old_value": "21000",
+      "new_value": "2100",
+      "updated_at": "2026-09-30T09:06:58.371Z"
+    },
+    {
+      "id": 435,
+      "table_name": "ability_properties",
+      "record_id": 180,
+      "field_name": "live_value",
+      "old_value": "8",
+      "new_value": "7",
+      "updated_at": "2026-09-30T09:06:58.371Z"
+    },
+    {
+      "id": 436,
+      "table_name": "heroes",
+      "record_id": 19,
+      "field_name": "live_ult_cost",
+      "old_value": "3135",
+      "new_value": "2900",
+      "updated_at": "2026-09-30T09:06:58.372Z"
+    },
+    {
+      "id": 437,
+      "table_name": "ability_properties",
+      "record_id": 189,
+      "field_name": "live_value",
+      "old_value": "13",
+      "new_value": "12",
+      "updated_at": "2026-09-30T09:06:58.372Z"
+    },
+    {
+      "id": 438,
+      "table_name": "constants",
+      "record_id": 15,
+      "field_name": "live_value",
+      "old_value": "0",
+      "new_value": "30",
+      "updated_at": "2026-09-30T09:06:58.373Z"
+    },
+    {
+      "id": 439,
+      "table_name": "ability_properties",
+      "record_id": 4,
+      "field_name": "live_value",
+      "old_value": "75",
+      "new_value": "90",
+      "updated_at": "2026-09-30T09:06:58.374Z"
+    },
+    {
+      "id": 440,
+      "table_name": "ability_properties",
+      "record_id": 5,
+      "field_name": "live_value",
+      "old_value": "75",
+      "new_value": "90",
+      "updated_at": "2026-09-30T09:06:58.374Z"
+    },
+    {
+      "id": 441,
+      "table_name": "ability_properties",
+      "record_id": 16,
+      "field_name": "live_value",
+      "old_value": "10",
+      "new_value": "(50/4)",
+      "updated_at": "2026-09-30T09:06:58.375Z"
+    },
+    {
+      "id": 442,
+      "table_name": "ability_properties",
+      "record_id": 17,
+      "field_name": "live_value",
+      "old_value": "10",
+      "new_value": "(50/4)",
+      "updated_at": "2026-09-30T09:06:58.376Z"
+    },
+    {
+      "id": 443,
+      "table_name": "heroes",
+      "record_id": 7,
+      "field_name": "live_health",
+      "old_value": "250",
+      "new_value": "100",
+      "updated_at": "2026-09-30T09:06:58.376Z"
+    },
+    {
+      "id": 444,
+      "table_name": "heroes",
+      "record_id": 7,
+      "field_name": "live_shields",
+      "old_value": "400",
+      "new_value": "375",
+      "updated_at": "2026-09-30T09:06:58.377Z"
+    },
+    {
+      "id": 445,
+      "table_name": "ability_properties",
+      "record_id": 82,
+      "field_name": "live_value",
+      "old_value": "40",
+      "new_value": "25",
+      "updated_at": "2026-09-30T09:06:58.377Z"
+    },
+    {
+      "id": 446,
+      "table_name": "heroes",
+      "record_id": 12,
+      "field_name": "live_ult_cost",
+      "old_value": "2125",
+      "new_value": "2000",
+      "updated_at": "2026-09-30T09:06:58.378Z"
+    },
+    {
+      "id": 447,
+      "table_name": "heroes",
+      "record_id": 17,
+      "field_name": "live_health",
+      "old_value": "525",
+      "new_value": "450",
+      "updated_at": "2026-09-30T09:06:58.378Z"
+    },
+    {
+      "id": 448,
+      "table_name": "ability_properties",
+      "record_id": 168,
+      "field_name": "live_value",
+      "old_value": "12",
+      "new_value": "13",
+      "updated_at": "2026-09-30T09:06:58.378Z"
+    },
+    {
+      "id": 449,
+      "table_name": "heroes",
+      "record_id": 14,
+      "field_name": "live_health",
+      "old_value": "425",
+      "new_value": "275",
+      "updated_at": "2026-09-30T09:06:58.379Z"
     }
   ]
 }
