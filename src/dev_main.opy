@@ -1,5 +1,3 @@
-# Include for global scoping
-#!include "heroes/sombra/hack_status.opy"
 
 # Useful constants and macros
 #!include "constants/ow1_constants.opy"
@@ -11,7 +9,7 @@
 #!include "lobby/dev_lobby.opy"
 
 # Useful functions
-#!include "utilities/stat_helper.opy"
+#!include "utilities/emu_helper.opy"
 #!include "heroes/init.opy"
 #!include "utilities/reset.opy"
 #!include "utilities/custom_hp.opy"
@@ -23,7 +21,7 @@
 #!include "utilities/anti_crash.opy"
 
 # OW1 logic
-#!include "passives/damage/damage_passive.opy"
+#!include "passives/global/global_passive.opy"
 # Remove tank passive
 # !include "passives/tank/headshot.opy"
 # !include "passives/tank/knockback.opy"
