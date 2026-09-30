@@ -33,7 +33,7 @@ rule "[sombra.opy]: Remove hack bonus damage":
     eventPlayer.hack_damage_modifier = getLastDamageModification()
     waitUntil(eventPlayer.hasStatusEffect(Status.HACKED) == false, Math.INFINITY)
     stopDamageModification(eventPlayer.hack_damage_modifier)
-    
+
 rule "[sombra/stealth.opy]: Bind Ability 1 to stealth":
     @Event eachPlayer
     @Hero sombra
@@ -80,6 +80,14 @@ rule "[sombra/stealth.opy]: Exit Stealth when shooting":
 
 rule "[sombra/stealth.opy]: Exit Stealth when taking damage":
     @Event playerTookDamage
+    @Hero sombra
+    @Condition eventPlayer.is_using_stealth
+
+    exitStealth()
+    eventPlayer.setAbilityCooldown(Button.ABILITY_1, OW1_SOMBRA_STEALTH_COOLDOWN)
+
+rule "[sombra/stealth.opy]: Force Exit Stealth if you can shoot":
+    @Event playerDealtDamage
     @Hero sombra
     @Condition eventPlayer.is_using_stealth
 

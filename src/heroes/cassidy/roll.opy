@@ -1,7 +1,7 @@
 #!mainFile "../../dev_main.opy"
 
 
-rule "[mccree/roll.opy]: Remove damage reduction during roll":
+rule "[cassidy/roll.opy]: Remove damage reduction during roll":
     @Event eachPlayer
     @Hero cassidy
     @Condition eventPlayer.isUsingAbility1()
@@ -9,4 +9,4 @@ rule "[mccree/roll.opy]: Remove damage reduction during roll":
     eventPlayer.setDamageReceived(percent(100/(100-OW2_CASSIDY_COMBAT_ROLL_DAMAGE_REDUCTION)))
     waitUntil(not eventPlayer.isUsingAbility1(), Math.INFINITY)
     eventPlayer.setDamageReceived(100)
-    eventPlayer.setAbilityCooldown(Button.ABILITY_1, 6)
+    eventPlayer.setAbilityCooldown(Button.ABILITY_1, OW1_CASSIDY_COMBAT_ROLL_COOLDOWN)

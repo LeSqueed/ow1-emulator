@@ -101,9 +101,9 @@ def throwTranslocator():
                                  eventPlayer.transloc_position + eventPlayer.trasnloc_velocity, \
                                  null, \
                                  null, \
-                                 false).getHitPosition()) \ 
+                                 false).getHitPosition()) \
                          < 0.5), OW1_SOMBRA_TRANSLOCATOR_COOLDOWN)
-    
+
     # Freeze translocator projectile
     stopChasingVariable(eventPlayer.transloc_time)
     stopChasingVariable(eventPlayer.trasnloc_velocity)
@@ -134,9 +134,9 @@ def throwTranslocator():
                                  eventPlayer.transloc_position + eventPlayer.trasnloc_velocity, \
                                  null, \
                                  null, \
-                                 false).getHitPosition()) \ 
+                                 false).getHitPosition()) \
                          < 0.5), OW1_SOMBRA_TRANSLOCATOR_COOLDOWN)
-    
+
     # Freeze translocator projectile
     stopChasingVariable(eventPlayer.transloc_time)
     stopChasingVariable(eventPlayer.trasnloc_velocity)
@@ -182,5 +182,6 @@ rule "[sombra/translocator.opy]: Break translocator when shot":
     @Condition eventPlayer.getTeam() == getOppositeTeam(eventPlayer.enemy_sombra_player.getTeam())
     @Condition eventPlayer.isFiringPrimaryFire() or eventPlayer.isFiringSecondaryFire()
     @Condition isAimingAtSphere(eventPlayer.getEyePosition(), eventPlayer.getFacingDirection(), eventPlayer.enemy_sombra_player.transloc_position, 0.1)
+    @Condition isInLoS(eventPlayer.getEyePosition(), eventPlayer.enemy_sombra_player.transloc_position, BarrierLos.BLOCKED_BY_ENEMY_BARRIERS)
 
     destroyTranslocator(eventPlayer.enemy_sombra_player)

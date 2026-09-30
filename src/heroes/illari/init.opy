@@ -6,11 +6,10 @@
 
 def initIllari():
     @Name "[illari/init.opy]: initIllari()"
-    
+
     setCustomHp(OW1_ILLARI_HEALTH, 0, 0)
     setUltCost(OW1_ILLARI_ULT_COST)
 
-    #removePassiveHealing()
 
     setBaseDamage(eventPlayer, OW1_ILLARI_CAPTIVE_SUN_DAMAGE/OW2_ILLARI_CAPTIVE_SUN_DAMAGE)
 

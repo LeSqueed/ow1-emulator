@@ -19,15 +19,16 @@ def initWidowmaker():
 
     setCustomHp(OW1_WIDOWMAKER_HEALTH, 0, 0)
     setUltCost(OW1_WIDOWMAKER_ULT_COST)
+    setBaseDamage(eventPlayer, OW1_MELEE_DAMAGE/OW2_MELEE_DAMAGE)
     #removeSelfHealing()
-    
+
 rule "[widowmaker.opy]: Revert sniper damage falloff":
     @Event playerDealtDamage
     @Hero widowmaker
     @Condition eventPlayer.isFiringSecondaryFire()
     @Condition eventPlayer.isFiringPrimaryFire()
     @Condition eventAbility == Button.PRIMARY_FIRE
-    
+
     eventPlayer.scoped_shot_distance = distance(attacker.getEyePosition(), victim)
     eventPlayer.ow2_scoped_damage_falloff_scalar = OW2WidowmakerFalloff(eventPlayer.scoped_shot_distance)
     # Cap min/max scalar
@@ -37,7 +38,7 @@ rule "[widowmaker.opy]: Revert sniper damage falloff":
         eventPlayer.ow2_scoped_damage_falloff_scalar = OW2_WIDOWMAKER_DAMAGE_FALLOFF_SCALAR
 
     eventPlayer.scoped_damage_base = eventDamage/eventPlayer.ow2_scoped_damage_falloff_scalar
-    
+
     eventPlayer.ow1_scoped_damage_falloff_scalar = OW1WidowmakerFalloff(eventPlayer.scoped_shot_distance)
     # Cap min/max scalar
     if eventPlayer.ow1_scoped_damage_falloff_scalar > 1: # Max damage scalar
@@ -47,3 +48,10 @@ rule "[widowmaker.opy]: Revert sniper damage falloff":
 
     eventPlayer.expected_scoped_damage = eventPlayer.scoped_damage_base * eventPlayer.ow1_scoped_damage_falloff_scalar
     damage(victim, attacker, eventPlayer.expected_scoped_damage - eventDamage)
+
+rule "[widowmaker.opy]: Compensate Widow global damage reduction":
+    @Event playerDealtDamage
+    @Hero widowmaker
+    @Condition eventAbility in [Button.ABILITY_2, Button.PRIMARY_FIRE]
+
+    damage(victim, attacker, (eventDamage/eventPlayer._base_damage_scalar - eventDamage)/eventPlayer._base_damage_scalar)

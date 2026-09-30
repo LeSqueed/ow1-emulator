@@ -120,17 +120,6 @@
       "id": 13
     },
     {
-      "display_name": "damage passive heal reduction percent",
-      "constant_name": "DAMAGE_PASSIVE_HEAL_REDUCTION_PERCENT",
-      "live_value": 30,
-      "patched_value": 0,
-      "remove_prefix": false,
-      "enabled": true,
-      "file": "ow2",
-      "value_type": "number",
-      "id": 14
-    },
-    {
       "display_name": "damage passive tank heal reduction percent",
       "constant_name": "DAMAGE_PASSIVE_TANK_HEAL_REDUCTION_PERCENT",
       "live_value": 30,
@@ -162,6 +151,17 @@
       "file": "ow2",
       "value_type": "number",
       "id": 17
+    },
+    {
+      "display_name": "overhealth ult charge reduction",
+      "constant_name": "OVERHEALTH_ULT_CHARGE_REDUCTION",
+      "live_value": 50,
+      "patched_value": 0,
+      "remove_prefix": false,
+      "enabled": true,
+      "file": "both",
+      "value_type": "number",
+      "id": 18
     }
   ],
   "heroes": [
@@ -296,7 +296,7 @@
       "constant_name": "echo",
       "role": "Dps",
       "live_health": 150,
-      "patched_health": 199,
+      "patched_health": 200,
       "live_armor": 0,
       "patched_armor": 0,
       "live_shields": 75,
@@ -898,6 +898,24 @@
       "display_name": "Swift Step",
       "constant_name": "swift_step",
       "id": 76
+    },
+    {
+      "hero_id": 2,
+      "display_name": "The Viper",
+      "constant_name": "the_viper",
+      "id": 77
+    },
+    {
+      "hero_id": 6,
+      "display_name": "Peacekeeper",
+      "constant_name": "peacekeeper",
+      "id": 78
+    },
+    {
+      "hero_id": 12,
+      "display_name": "Blade",
+      "constant_name": "blade",
+      "id": 79
     }
   ],
   "ability_properties": [
@@ -1405,7 +1423,7 @@
       "ability_id": 23,
       "name": "Cooldown",
       "live_value": 5,
-      "patched_value": 5,
+      "patched_value": 6,
       "value_type": "number",
       "enabled": true,
       "file": "both",
@@ -2890,6 +2908,226 @@
       "enabled": true,
       "file": "ow1",
       "id": 192
+    },
+    {
+      "ability_id": 77,
+      "name": "Damage",
+      "live_value": 0,
+      "patched_value": 70,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 193
+    },
+    {
+      "ability_id": 77,
+      "name": "Damage falloff start distance",
+      "live_value": 0,
+      "patched_value": 30,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 194
+    },
+    {
+      "ability_id": 77,
+      "name": "Damage falloff end distance",
+      "live_value": 0,
+      "patched_value": 50,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 195
+    },
+    {
+      "ability_id": 77,
+      "name": "Damage falloff scalar",
+      "live_value": 0,
+      "patched_value": 0.3,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 196
+    },
+    {
+      "ability_id": 78,
+      "name": "Damage",
+      "live_value": 0,
+      "patched_value": 70,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 197
+    },
+    {
+      "ability_id": 78,
+      "name": "Damage falloff start distance",
+      "live_value": 0,
+      "patched_value": 20,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 198
+    },
+    {
+      "ability_id": 78,
+      "name": "Damage falloff end distance",
+      "live_value": 0,
+      "patched_value": 40,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 199
+    },
+    {
+      "ability_id": 78,
+      "name": "Damage falloff scalar",
+      "live_value": 0,
+      "patched_value": 0.3,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 200
+    },
+    {
+      "ability_id": 21,
+      "name": "Cooldown",
+      "live_value": 0,
+      "patched_value": 1,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 201
+    },
+    {
+      "ability_id": 21,
+      "name": "Healing",
+      "live_value": 0,
+      "patched_value": 15,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 202
+    },
+    {
+      "ability_id": 21,
+      "name": "Radius",
+      "live_value": 0,
+      "patched_value": 20,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 203
+    },
+    {
+      "ability_id": 22,
+      "name": "Armor",
+      "live_value": 0,
+      "patched_value": 15,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 204
+    },
+    {
+      "ability_id": 22,
+      "name": "Armor duration",
+      "live_value": 0,
+      "patched_value": 30,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 205
+    },
+    {
+      "ability_id": 22,
+      "name": "Armor max",
+      "live_value": 0,
+      "patched_value": 100,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 206
+    },
+    {
+      "ability_id": 22,
+      "name": "Duration",
+      "live_value": 0,
+      "patched_value": 10,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 207
+    },
+    {
+      "ability_id": 22,
+      "name": "Polling freq",
+      "live_value": 0,
+      "patched_value": 2,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 208
+    },
+    {
+      "ability_id": 22,
+      "name": "Radius",
+      "live_value": 8.5,
+      "patched_value": 0,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow2",
+      "id": 209
+    },
+    {
+      "ability_id": 20,
+      "name": "Duration",
+      "live_value": 0,
+      "patched_value": 2,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 210
+    },
+    {
+      "ability_id": 20,
+      "name": "Speed",
+      "live_value": 0,
+      "patched_value": 45,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 211
+    },
+    {
+      "ability_id": 20,
+      "name": "Healing",
+      "live_value": 100,
+      "patched_value": 55,
+      "value_type": "number",
+      "enabled": true,
+      "file": "both",
+      "id": 212
+    },
+    {
+      "ability_id": 32,
+      "name": "Decay per second",
+      "live_value": 0,
+      "patched_value": 0.33,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 213
+    },
+    {
+      "ability_id": 79,
+      "name": "Swing speed",
+      "live_value": 0,
+      "patched_value": 0.7,
+      "value_type": "number",
+      "enabled": true,
+      "file": "ow1",
+      "id": 214
     }
   ],
   "revisions": [
@@ -6933,6 +7171,267 @@
       "old_value": "425",
       "new_value": "275",
       "updated_at": "2026-09-30T09:06:58.379Z"
+    },
+    {
+      "id": 450,
+      "table_name": "constants",
+      "record_id": 18,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"display_name\":\"overhealth ult charge reduction\",\"constant_name\":\"OVERHEALTH_ULT_CHARGE_REDUCTION\",\"live_value\":50,\"patched_value\":0,\"remove_prefix\":false,\"enabled\":true,\"file\":\"both\",\"value_type\":\"number\",\"id\":18}",
+      "updated_at": "2026-09-30T11:37:25.710Z"
+    },
+    {
+      "id": 451,
+      "table_name": "constants",
+      "record_id": 14,
+      "field_name": "__delete__",
+      "old_value": "{\"display_name\":\"damage passive heal reduction percent\",\"constant_name\":\"DAMAGE_PASSIVE_HEAL_REDUCTION_PERCENT\",\"live_value\":30,\"patched_value\":0,\"remove_prefix\":false,\"enabled\":true,\"file\":\"ow2\",\"value_type\":\"number\",\"id\":14}",
+      "new_value": null,
+      "updated_at": "2026-09-30T11:37:25.715Z"
+    },
+    {
+      "id": 452,
+      "table_name": "heroes",
+      "record_id": 10,
+      "field_name": "patched_health",
+      "old_value": "199",
+      "new_value": "200",
+      "updated_at": "2026-09-30T11:37:25.716Z"
+    },
+    {
+      "id": 453,
+      "table_name": "ability_properties",
+      "record_id": 51,
+      "field_name": "patched_value",
+      "old_value": "5",
+      "new_value": "6",
+      "updated_at": "2026-09-30T11:37:25.717Z"
+    },
+    {
+      "id": 454,
+      "table_name": "abilities",
+      "record_id": 77,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"hero_id\":2,\"display_name\":\"The Viper\",\"constant_name\":\"the_viper\",\"id\":77}",
+      "updated_at": "2026-09-30T11:37:25.718Z"
+    },
+    {
+      "id": 455,
+      "table_name": "ability_properties",
+      "record_id": 193,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":77,\"name\":\"Damage\",\"live_value\":0,\"patched_value\":70,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":193}",
+      "updated_at": "2026-09-30T11:37:25.720Z"
+    },
+    {
+      "id": 456,
+      "table_name": "ability_properties",
+      "record_id": 194,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":77,\"name\":\"Damage falloff start distance\",\"live_value\":0,\"patched_value\":30,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":194}",
+      "updated_at": "2026-09-30T11:37:25.720Z"
+    },
+    {
+      "id": 457,
+      "table_name": "ability_properties",
+      "record_id": 195,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":77,\"name\":\"Damage falloff end distance\",\"live_value\":0,\"patched_value\":50,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":195}",
+      "updated_at": "2026-09-30T11:37:25.721Z"
+    },
+    {
+      "id": 458,
+      "table_name": "ability_properties",
+      "record_id": 196,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":77,\"name\":\"Damage falloff scalar\",\"live_value\":0,\"patched_value\":0.3,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":196}",
+      "updated_at": "2026-09-30T11:37:25.722Z"
+    },
+    {
+      "id": 459,
+      "table_name": "abilities",
+      "record_id": 78,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"hero_id\":6,\"display_name\":\"Peacekeeper\",\"constant_name\":\"peacekeeper\",\"id\":78}",
+      "updated_at": "2026-09-30T11:37:25.722Z"
+    },
+    {
+      "id": 460,
+      "table_name": "ability_properties",
+      "record_id": 197,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":78,\"name\":\"Damage\",\"live_value\":0,\"patched_value\":70,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":197}",
+      "updated_at": "2026-09-30T11:37:25.723Z"
+    },
+    {
+      "id": 461,
+      "table_name": "ability_properties",
+      "record_id": 198,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":78,\"name\":\"Damage falloff start distance\",\"live_value\":0,\"patched_value\":20,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":198}",
+      "updated_at": "2026-09-30T11:37:25.724Z"
+    },
+    {
+      "id": 462,
+      "table_name": "ability_properties",
+      "record_id": 199,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":78,\"name\":\"Damage falloff end distance\",\"live_value\":0,\"patched_value\":40,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":199}",
+      "updated_at": "2026-09-30T11:37:25.725Z"
+    },
+    {
+      "id": 463,
+      "table_name": "ability_properties",
+      "record_id": 200,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":78,\"name\":\"Damage falloff scalar\",\"live_value\":0,\"patched_value\":0.3,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":200}",
+      "updated_at": "2026-09-30T11:37:25.726Z"
+    },
+    {
+      "id": 464,
+      "table_name": "ability_properties",
+      "record_id": 201,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":21,\"name\":\"Cooldown\",\"live_value\":0,\"patched_value\":1,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":201}",
+      "updated_at": "2026-09-30T11:37:25.728Z"
+    },
+    {
+      "id": 465,
+      "table_name": "ability_properties",
+      "record_id": 202,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":21,\"name\":\"Healing\",\"live_value\":0,\"patched_value\":15,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":202}",
+      "updated_at": "2026-09-30T11:37:25.728Z"
+    },
+    {
+      "id": 466,
+      "table_name": "ability_properties",
+      "record_id": 203,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":21,\"name\":\"Radius\",\"live_value\":0,\"patched_value\":20,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":203}",
+      "updated_at": "2026-09-30T11:37:25.729Z"
+    },
+    {
+      "id": 467,
+      "table_name": "ability_properties",
+      "record_id": 204,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":22,\"name\":\"Armor\",\"live_value\":0,\"patched_value\":15,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":204}",
+      "updated_at": "2026-09-30T11:37:25.730Z"
+    },
+    {
+      "id": 468,
+      "table_name": "ability_properties",
+      "record_id": 205,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":22,\"name\":\"Armor duration\",\"live_value\":0,\"patched_value\":30,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":205}",
+      "updated_at": "2026-09-30T11:37:25.731Z"
+    },
+    {
+      "id": 469,
+      "table_name": "ability_properties",
+      "record_id": 206,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":22,\"name\":\"Armor max\",\"live_value\":0,\"patched_value\":100,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":206}",
+      "updated_at": "2026-09-30T11:37:25.732Z"
+    },
+    {
+      "id": 470,
+      "table_name": "ability_properties",
+      "record_id": 207,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":22,\"name\":\"Duration\",\"live_value\":0,\"patched_value\":10,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":207}",
+      "updated_at": "2026-09-30T11:37:25.732Z"
+    },
+    {
+      "id": 471,
+      "table_name": "ability_properties",
+      "record_id": 208,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":22,\"name\":\"Polling freq\",\"live_value\":0,\"patched_value\":2,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":208}",
+      "updated_at": "2026-09-30T11:37:25.733Z"
+    },
+    {
+      "id": 472,
+      "table_name": "ability_properties",
+      "record_id": 209,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":22,\"name\":\"Radius\",\"live_value\":8.5,\"patched_value\":0,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow2\",\"id\":209}",
+      "updated_at": "2026-09-30T11:37:25.734Z"
+    },
+    {
+      "id": 473,
+      "table_name": "ability_properties",
+      "record_id": 210,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":20,\"name\":\"Duration\",\"live_value\":0,\"patched_value\":2,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":210}",
+      "updated_at": "2026-09-30T11:37:25.735Z"
+    },
+    {
+      "id": 474,
+      "table_name": "ability_properties",
+      "record_id": 211,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":20,\"name\":\"Speed\",\"live_value\":0,\"patched_value\":45,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":211}",
+      "updated_at": "2026-09-30T11:37:25.736Z"
+    },
+    {
+      "id": 475,
+      "table_name": "ability_properties",
+      "record_id": 212,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":20,\"name\":\"Healing\",\"live_value\":100,\"patched_value\":55,\"value_type\":\"number\",\"enabled\":true,\"file\":\"both\",\"id\":212}",
+      "updated_at": "2026-09-30T11:37:25.736Z"
+    },
+    {
+      "id": 476,
+      "table_name": "ability_properties",
+      "record_id": 213,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":32,\"name\":\"Decay per second\",\"live_value\":0,\"patched_value\":0.33,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":213}",
+      "updated_at": "2026-09-30T11:37:25.737Z"
+    },
+    {
+      "id": 477,
+      "table_name": "abilities",
+      "record_id": 79,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"hero_id\":12,\"display_name\":\"Blade\",\"constant_name\":\"blade\",\"id\":79}",
+      "updated_at": "2026-09-30T11:37:25.738Z"
+    },
+    {
+      "id": 478,
+      "table_name": "ability_properties",
+      "record_id": 214,
+      "field_name": "__create__",
+      "old_value": null,
+      "new_value": "{\"ability_id\":79,\"name\":\"Swing speed\",\"live_value\":0,\"patched_value\":0.7,\"value_type\":\"number\",\"enabled\":true,\"file\":\"ow1\",\"id\":214}",
+      "updated_at": "2026-09-30T11:37:25.741Z"
     }
   ]
 }

@@ -8,15 +8,10 @@ rule "[echo/duplicate.opy]: Initialize duplicate hero":
 
     wait(0.016)
     eventPlayer._hero_setup = eventPlayer.getHeroOfDuplication()
-    
-    resetHero()
-    #wait(0.016)
-    initHero()
-    eventPlayer.setStatusEffect(null, Status.INVINCIBLE, 0.3)
-    heal(eventPlayer, null, 600)
 
-    #resetSelfHealing()
-    #removePassiveHealing()
+    resetHero()
+    initHero()
+
     enableAllAbilities()
 
 
@@ -38,3 +33,15 @@ rule "[echo/duplicate.opy]: Correct duplicate ultimate charge rate":
 
     wait()
     eventPlayer.setUltCharge((percent(1 - (OW2_ECHO_DUPLICATE_ULT_CHARGE_MULTIPLIER/OW1_ECHO_DUPLICATE_ULT_CHARGE_MULTIPLIER)))/OW2_ECHO_DUPLICATE_ULT_CHARGE_MULTIPLIER)
+
+
+rule "[echo/duplicate.opy]: Disallow Copy Teammates":
+    @Event eachPlayer
+    @Hero echo
+    @Condition eventPlayer.getUltCharge() == 100
+    @Condition not eventPlayer.isDuplicatingAHero()
+    @Condition not (eventPlayer.getRealPlayerClosestToReticle(Team.ALL) in getPlayers(getOppositeTeam(eventPlayer.getTeam())))
+
+    eventPlayer.disallowButton(Button.ULTIMATE)
+    waitUntil(eventPlayer.getRealPlayerClosestToReticle(Team.ALL) in getPlayers(getOppositeTeam(eventPlayer.getTeam())), Math.INFINITY)
+    eventPlayer.allowButton(Button.ULTIMATE)

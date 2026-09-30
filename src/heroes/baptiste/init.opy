@@ -10,7 +10,7 @@ def initBaptiste():
     setCustomHp(OW1_BAPTISTE_HEALTH, 0, 0)
     setUltCost(OW1_BAPTISTE_ULT_COST)
 
-    # setBaseDamage(eventPlayer, OW1_BAPTISTE_BIOTIC_LAUNCHER_DAMAGE/OW2_BAPTISTE_BIOTIC_LAUNCHER_DAMAGE)
+    setBaseDamage(eventPlayer, OW1_MELEE_DAMAGE/OW2_MELEE_DAMAGE)
 
     eventPlayer.setAmmo(0, OW1_BAPTISTE_BIOTIC_LAUNCHER_PRIMARY_CLIP_SIZE)
     eventPlayer.setMaxAmmo(0, OW1_BAPTISTE_BIOTIC_LAUNCHER_PRIMARY_CLIP_SIZE)
@@ -18,6 +18,10 @@ def initBaptiste():
     eventPlayer.setAmmo(1, OW1_BAPTISTE_BIOTIC_LAUNCHER_SECONDARY_CLIP_SIZE)
     eventPlayer.setMaxAmmo(1, OW1_BAPTISTE_BIOTIC_LAUNCHER_SECONDARY_CLIP_SIZE)
 
-    #removeSelfHealing()
+rule "[baptiste/init.opy]: Compensate Bap global damage reduction":
+    @Event playerDealtDamage
+    @Hero baptiste
+    @Condition eventAbility == Button.PRIMARY_FIRE
 
-    # eventPlayer.disallowButton(Button.ABILITY_2)
+    damage(victim, attacker, (eventDamage/eventPlayer._base_damage_scalar - eventDamage)/eventPlayer._base_damage_scalar)
+

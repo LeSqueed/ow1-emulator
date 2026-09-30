@@ -1,5 +1,6 @@
 #!mainFile "../../dev_main.opy"
 
+
 playervar punched_victims
 playervar wall_impacted_victims
 playervar punch_charge_time
@@ -43,10 +44,6 @@ rule "[doomfist/punch.opy]: Initialize rocket punch":
     waitUntil(not eventPlayer.isHoldingButton(Button.SECONDARY_FIRE), Math.INFINITY)
     stopChasingVariable(eventPlayer.punch_charge_time)
     eventPlayer.punch_charge_time = max(OW1_DOOMFIST_ROCKET_PUNCH_CHARGE_TIME_MIN, eventPlayer.punch_charge_time)
-    
-    # cooldown
-    waitUntil(not eventPlayer.isFiringSecondaryFire(), Math.INFINITY)
-    eventPlayer.setAbilityCooldown(Button.SECONDARY_FIRE, OW1_DOOMFIST_ROCKET_PUNCH_COOLDOWN) # workshop bug (doesn't work)
 
 
 # DO NOT switch the order of this rule with the next rule
@@ -60,7 +57,7 @@ rule "[doomfist/punch.opy]: Find wall impacted victims":
 
     attacker.wall_impacted_victims.append(victim)
     if (len(attacker.wall_impacted_victims) == 1): # OW1 single punch victim
-        damage(victim, attacker, getRocketPunchWallImpactDamage(eventPlayer.punch_charge_time)-eventDamage)
+        damage(victim, attacker, (getRocketPunchWallImpactDamage(eventPlayer.punch_charge_time) - eventDamage) / eventPlayer._base_damage_scalar)
     else: # OW2 multi punch victim
         heal(victim, null, eventDamage)
 
@@ -75,21 +72,21 @@ rule "[doomfist/punch.opy]: Find punched victims":
 
     attacker.punched_victims.append(victim)
     if (len(attacker.punched_victims) == 1): # OW1 single punch victim
-        damage(victim, attacker, getRocketPunchDamage(eventPlayer.punch_charge_time)-eventDamage)
+        damage(victim, attacker, (getRocketPunchDamage(eventPlayer.punch_charge_time) - eventDamage) / eventPlayer._base_damage_scalar)
         victim.applyImpulse(attacker.getFacingDirection(), getPunchKnockbackSpeed(eventPlayer.punch_charge_time), Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION) # Apply knockback manually
-        damage(attacker, null, OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar - OW1_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH)
+        #damage(attacker, null, OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar - OW1_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH)
     else: # OW2 multi punch victim
         heal(victim, null, eventDamage) # Heal back OW2 punch victims
         # Transfer shield gained from uppercut to shield gained from OW2 punch victims
-        damage(attacker, null, OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar - min(OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar, attacker.uppercut_shields))
-        attacker.uppercut_shields -= min(OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar, attacker.uppercut_shields)
+        #damage(attacker, null, OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar - min(OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar, attacker.uppercut_shields))
+        #attacker.uppercut_shields -= min(OW2_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH*eventPlayer._hp_scalar, attacker.uppercut_shields)
 
 
 rule "[doomfist/punch.opy]: Remove Empowered Punch from ultimate":
     @Event eachPlayer
     @Hero doomfist
     @Condition eventPlayer.isUsingUltimate() == true
-    
+
     eventPlayer.disallowButton(Button.ABILITY_2)
     eventPlayer.is_ultimate_locked = true
     waitUntil(eventPlayer.isHoldingButton(Button.PRIMARY_FIRE), 4.8)
@@ -117,5 +114,5 @@ rule "[doomfist/punch.opy]: Remove stun from wall impact":
     @Hero doomfist
     @Condition eventAbility == Button.SECONDARY_FIRE
     @Condition victim in eventPlayer.wall_impacted_victims
-    
+
     victim.clearStatusEffect(Status.STUNNED)

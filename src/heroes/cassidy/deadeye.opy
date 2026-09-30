@@ -3,7 +3,7 @@
 subroutine startOW1Deadeye
 
 
-rule "[mccree/deadeye.opy]: OW1 deadeye damage + remove OW2 damage reduction during deadeye":
+rule "[cassidy/deadeye.opy]: OW1 deadeye damage + remove OW2 damage reduction during deadeye":
     @Event eachPlayer
     @Hero cassidy
     @Condition eventPlayer.isUsingUltimate()
@@ -16,7 +16,7 @@ rule "[mccree/deadeye.opy]: OW1 deadeye damage + remove OW2 damage reduction dur
 
 
 def startOW1Deadeye():
-    @Name "[mccree/deadeye.opy]: startOW1Deadeye()"
+    @Name "[cassidy/deadeye.opy]: startOW1Deadeye()"
 
     eventPlayer.setDamageDealt(percent(OW1_CASSIDY_DEADEYE_DAMAGE/OW2_CASSIDY_DEADEYE_DAMAGE))
     eventPlayer.setDamageReceived(percent(100/(100-OW2_CASSIDY_DEADEYE_DAMAGE_REDUCTION_MAX)))

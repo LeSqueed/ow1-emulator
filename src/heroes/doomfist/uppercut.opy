@@ -1,5 +1,6 @@
 #!mainFile "../../dev_main.opy"
 
+
 playervar uppercut_pvar
 #!defineMember is_hit_by_uppercut uppercut_pvar[0]
 #!defineMember is_uppercut_locked uppercut_pvar[1]
@@ -94,18 +95,18 @@ rule "[doomfist/uppercut.opy]: Detect uppercut victims":
     do:
         eventPlayer._uppercut_victims = \
             getPlayersInRadius(
-                eventPlayer, 
-                OW1_DOOMFIST_UPPERCUT_RADIUS, 
-                getOppositeTeam(eventPlayer.getTeam()), 
+                eventPlayer,
+                OW1_DOOMFIST_UPPERCUT_RADIUS,
+                getOppositeTeam(eventPlayer.getTeam()),
                 LosCheck.SURFACES).exclude(eventPlayer)
         eventPlayer._uppercut_victims = \
-            [uppercut_victim for uppercut_victim in eventPlayer._uppercut_victims 
+            [uppercut_victim for uppercut_victim in eventPlayer._uppercut_victims
                     if ((uppercut_victim.isAlive()) \
                     and (angleBetweenVectors(
-                            getForwardDirection(eventPlayer), 
+                            getForwardDirection(eventPlayer),
                                 directionTowards(
-                                    eventPlayer, 
-                                    uppercut_victim)) 
+                                    eventPlayer,
+                                    uppercut_victim))
                         <= 90))] # Victim in front of doomfist
 
         eventPlayer._uppercut_victims.is_hit_by_uppercut = true
@@ -121,7 +122,7 @@ rule "[doomfist/uppercut.opy]: Damage uppercut victims + vfx + uppercut knockbac
     @Condition eventPlayer._last_uppercut_attacker != eventPlayer._uppercut_attacker
 
     # damage
-    damage(eventPlayer, eventPlayer._uppercut_attacker, OW1_DOOMFIST_UPPERCUT_DAMAGE)
+    damage(eventPlayer, eventPlayer._uppercut_attacker, OW1_DOOMFIST_UPPERCUT_DAMAGE*OW2_MELEE_DAMAGE/OW1_MELEE_DAMAGE)
     eventPlayer.setEnvironmentalKillCreditor(eventPlayer._uppercut_attacker)
 
     # upercut hit vfx
@@ -142,7 +143,7 @@ rule "[doomfist/uppercut.opy]: Damage uppercut victims + vfx + uppercut knockbac
 
     # best defense
 #    stopChasingVariable(eventPlayer._uppercut_attacker.uppercut_shields)
-#    eventPlayer._uppercut_attacker.uppercut_shields += OW1_DOOMFIST_BEST_DEFENSE
+#    eventPlayer._uppercut_attacker.uppercut_shields += OW1_DOOMFIST_BEST_DEFENSE_BASE_OVERHEALTH
 #    wait(OW1_DOOMFIST_BEST_DEFENSE_LINGER)
 #    chase(eventPlayer._uppercut_attacker.uppercut_shields, 0, rate=OW1_DOOMFIST_BEST_DEFENSE_DECAY_RATE, ChaseReeval.NONE)
 
@@ -164,7 +165,7 @@ rule "[doomfist/uppercut.opy]: Uppercut victim state variables":
 #    @Hero doomfist
 #    @Condition updateEveryTick(eventPlayer.uppercut_shields > 0)
 #    @Condition updateEveryTick(eventPlayer.getHealth() < eventPlayer.getMaxHealth())
-    
+#
 #    do:
 #        eventPlayer.hp_before_uppercut = eventPlayer.getHealth()
 #        heal(eventPlayer, null, eventPlayer.uppercut_shields)

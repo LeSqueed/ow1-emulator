@@ -15,10 +15,10 @@ rule "[doomfist/meteor.opy]: Deal OW1 Meteor Strike damage":
     @Hero doomfist
     @Condition eventAbility == Button.ULTIMATE
     # Only activate this rule when damage is dealt by inner ring (/2 accounts for damage reduction from armor, nanoboost, etc)
-    @Condition eventDamage < (OW2_DOOMFIST_METEOR_STRIKE_OUTER_SPHERE_MAX_DAMAGE + OW2_DOOMFIST_METEOR_STRIKE_INNER_SPHERE_DAMAGE)/2
+    @Condition eventDamage / eventPlayer._base_damage_scalar < (OW2_DOOMFIST_METEOR_STRIKE_OUTER_SPHERE_MAX_DAMAGE + OW2_DOOMFIST_METEOR_STRIKE_INNER_SPHERE_DAMAGE) / 2
 
-    damage(victim, attacker, getMeteorStrikeDamage(eventDamage) - eventDamage)
-
+    damage(victim, attacker, (getMeteorStrikeDamage(eventDamage/eventPlayer._base_damage_scalar) - eventDamage/eventPlayer._base_damage_scalar) / eventPlayer._base_damage_scalar)
+    
 
 rule "[doomfist/meteor.opy]: Compensate Meteor Strike slow effect":
     @Event playerDealtDamage
@@ -43,13 +43,13 @@ rule "[doomfist/meteor.opy]: OW1 Meteor Strike knockback":
     @Hero doomfist
     @Condition eventAbility == Button.ULTIMATE
 
-    victim.setGravity(50) 
+    victim.setGravity(50)
     # Boop slammed victims up
     victim.applyImpulse(Vector.UP, 5, Relativity.TO_WORLD, Impulse.CANCEL_CONTRARY_MOTION_XYZ)
     # Boop slammed victims away from meteor strike
-    victim.applyImpulse(directionTowards(attacker, victim), 
+    victim.applyImpulse(directionTowards(attacker, victim),
                         20/max(distance(attacker, victim), OW1_DOOMFIST_METEOR_STRIKE_INNER_SPHERE_RADIUS), # inverse square curve passing through (2, 10)
-                        Relativity.TO_WORLD, 
+                        Relativity.TO_WORLD,
                         Impulse.CANCEL_CONTRARY_MOTION_XYZ)
     victim.setGravity(100)
 

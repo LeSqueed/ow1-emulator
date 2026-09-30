@@ -17,7 +17,7 @@ rule "[roadhog/wholehog.opy]: OW1 disable abilities during wholehog":
 
     eventPlayer.setMeleeEnabled(false)
     eventPlayer.setAbility1Enabled(false)
-    eventPlayer.setAbility2Enabled(false)
+    eventPlayer.disallowButton(Button.ABILITY_2)
     eventPlayer.setDamageDealt(percent(OW1_ROADHOG_WHOLEHOG_DAMAGE/OW2_ROADHOG_WHOLEHOG_DAMAGE))
     eventPlayer.setKnockbackDealt(percent(OW1_ROADHOG_WHOLEHOG_KNOCKBACK/OW2_ROADHOG_WHOLEHOG_KNOCKBACK))
 
@@ -29,8 +29,7 @@ rule "[roadhog/wholehog.opy]: OW1 enable abilities when not in wholehog":
 
     eventPlayer.setMeleeEnabled(true)
     eventPlayer.setAbility1Enabled(true)
-    eventPlayer.setAbility2Enabled(true)
-    eventPlayer.setDamageDealt(100)
+    setBaseDamage(eventPlayer, OW1_MELEE_DAMAGE/OW2_MELEE_DAMAGE)
     eventPlayer.setKnockbackDealt(100)
     eventPlayer.stopForcingButton(Button.PRIMARY_FIRE)
 
@@ -61,7 +60,7 @@ rule "[roadhog/wholehog.opy]: Cancel ult when stunned":
         waitUntil(not eventPlayer.hasStatusEffect(Status.ASLEEP), Math.INFINITY)
     elif eventPlayer.hasStatusEffect(Status.STUNNED):
         waitUntil(not eventPlayer.hasStatusEffect(Status.STUNNED), Math.INFINITY)
-    
+
     if eventPlayer.isUsingUltimate():
         eventPlayer._scrap_ammo = eventPlayer.getAmmo(0)
         cancelWholehog()
@@ -71,7 +70,7 @@ rule "[roadhog/wholehog.opy]: Reduce ultimate duration":
     @Event eachPlayer
     @Hero roadhog
     @Condition eventPlayer.isUsingUltimate()
-    
+
     wait(OW1_ROADHOG_ULTIMATE_DURATION, Wait.ABORT_WHEN_FALSE)
     eventPlayer._scrap_ammo = OW1_ROADHOG_CLIP_SIZE
     cancelWholehog()
@@ -82,7 +81,7 @@ def cancelWholehog():
     @Name "[roadhog/wholehog.opy]: cancelWholehog()"
 
     eventPlayer.stopForcingButton(Button.PRIMARY_FIRE)
-    
+
     # Save hog state
     eventPlayer._hog_hp = eventPlayer.getHealth()
     eventPlayer._hook_cooldown = eventPlayer.getAbilityCooldown(Button.ABILITY_1)
@@ -100,11 +99,13 @@ rule "[roadhog/wholehog.opy]: Go back to roadhog":
     eventPlayer.startForcingHero(Hero.ROADHOG)
     eventPlayer.stopForcingCurrentHero()
 
-    # Restore hog state
-    setCustomHp(eventPlayer._hp_health, eventPlayer._hp_armor, eventPlayer._hp_shields)
+    # Restore hog 
     eventPlayer.setHealth(eventPlayer._hog_hp)
+    eventPlayer.setKnockbackDealt(100)
+    eventPlayer.stopForcingButton(Button.PRIMARY_FIRE)
     eventPlayer.setAbilityCooldown(Button.ABILITY_1, eventPlayer._hook_cooldown)
     eventPlayer.setAbilityCooldown(Button.ABILITY_2, eventPlayer._breather_cooldown)
+
 
     eventPlayer.setAmmo(0, eventPlayer._scrap_ammo)
     eventPlayer.setMaxAmmo(0, OW1_ROADHOG_CLIP_SIZE) # Without this, hog gets his ow2 clip size back

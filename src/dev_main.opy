@@ -54,7 +54,7 @@
 # !include "heroes/lifeweaver/init.opy"
 #!include "heroes/lucio/init.opy"
 # !include "heroes/mauga/init.opy"
-#!include "heroes/mccree/init.opy"
+#!include "heroes/cassidy/init.opy"
 #!include "heroes/mei/init.opy"
 #!include "heroes/mercy/init.opy"
 #!include "heroes/moira/init.opy"
